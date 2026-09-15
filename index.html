@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecosystems & Interactions in the Environment – Grade 7 Science</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+
+  :root {
+    --green-dark: #1a4731;
+    --green-mid: #2d7a50;
+    --green-light: #4caf78;
+    --green-pale: #e8f5ee;
+    --earth: #8B6914;
+    --earth-light: #f5edda;
+    --sky: #2563a8;
+    --sky-light: #dbeafe;
+    --sun: #f59e0b;
+    --text: #1a2e1e;
+    --text-soft: #3d5c45;
+    --bg: #f7fbf8;
+    --white: #ffffff;
+    --border: #c8e6d0;
+    --correct: #16a34a;
+    --wrong: #dc2626;
+    --quiz-bg: #fffbeb;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--green-dark);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  nav a {
+    color: #a7f3c4;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 1rem 0.25rem;
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+  }
+  nav a:hover { color: #fff; border-bottom-color: var(--green-light); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--green-dark) 0%, #1e6640 50%, var(--sky) 100%);
+    color: white;
+    text-align: center;
+    padding: 5rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Cellipse cx='400' cy='420' rx='500' ry='200' fill='rgba(255,255,255,0.04)'/%3E%3Ccircle cx='100' cy='80' r='120' fill='rgba(255,255,255,0.03)'/%3E%3Ccircle cx='700' cy='50' r='90' fill='rgba(255,255,255,0.03)'/%3E%3C/svg%3E") no-repeat center;
+    background-size: cover;
+  }
+  .hero-emoji { font-size: 4rem; margin-bottom: 1rem; display: block; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; margin-bottom: 0.5rem; }
+  .hero p { font-size: 1.2rem; opacity: 0.85; max-width: 600px; margin: 0 auto 1.5rem; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 2rem;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  /* LAYOUT */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+
+  section { padding: 3.5rem 0; }
+  section + section { border-top: 2px solid var(--border); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .section-icon {
+    font-size: 2rem;
+    background: var(--green-pale);
+    border-radius: 12px;
+    width: 52px; height: 52px;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-size: 1.7rem;
+    font-weight: 900;
+    color: var(--green-dark);
+  }
+
+  /* CARDS */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .card {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--green-mid); }
+  .card-term {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--green-mid);
+    margin-bottom: 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .card-def {
+    font-size: 0.93rem;
+    color: var(--text-soft);
+    margin-bottom: 0.75rem;
+    font-family: 'Merriweather', serif;
+    line-height: 1.6;
+  }
+  .card-example {
+    background: var(--green-pale);
+    border-left: 3px solid var(--green-light);
+    border-radius: 0 8px 8px 0;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.84rem;
+    color: var(--green-dark);
+    font-weight: 600;
+  }
+  .card-example::before { content: '🌿 Example: '; }
+
+  /* WIDE CARDS */
+  .card-wide {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .card-wide .card-term { font-size: 1.1rem; }
+
+  /* COMPARISON TABLE */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    background: var(--white);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 2px solid var(--border);
+  }
+  .compare-table th {
+    background: var(--green-dark);
+    color: white;
+    padding: 0.85rem 1rem;
+    text-align: left;
+    font-weight: 800;
+  }
+  .compare-table td {
+    padding: 0.8rem 1rem;
+    border-top: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .compare-table tr:nth-child(even) td { background: var(--green-pale); }
+  .compare-table tr:hover td { background: #d4eddb; }
+
+  /* FOOD CHAIN VISUAL */
+  .food-chain {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .fc-node {
+    background: var(--green-pale);
+    border: 2px solid var(--green-light);
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .fc-node .fc-label { font-size: 0.7rem; color: var(--green-mid); display: block; }
+  .fc-arrow {
+    font-size: 1.3rem;
+    color: var(--green-mid);
+    font-weight: 900;
+  }
+
+  /* PYRAMID */
+  .pyramid { margin: 1.5rem 0; }
+  .pyramid-level {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+  .pyramid-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    height: 44px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    transition: transform 0.15s;
+    cursor: default;
+  }
+  .pyramid-block:hover { transform: scaleX(1.01); }
+
+  /* SYMBIOSIS CARDS */
+  .symbiosis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+  .sym-card {
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .sym-card .sym-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .sym-card h3 { font-size: 1.1rem; font-weight: 900; margin-bottom: 0.4rem; }
+  .sym-card p { font-size: 0.88rem; line-height: 1.5; }
+  .sym-card .sym-example { margin-top: 0.75rem; font-size: 0.82rem; font-weight: 700; padding: 0.35rem 0.75rem; border-radius: 20px; display: inline-block; }
+
+  .parasitism-card { background: #fff0f0; border: 2px solid #fca5a5; }
+  .parasitism-card h3 { color: #b91c1c; }
+  .parasitism-card .sym-example { background: #fee2e2; color: #b91c1c; }
+
+  .mutualism-card { background: var(--green-pale); border: 2px solid var(--green-light); }
+  .mutualism-card h3 { color: var(--green-dark); }
+  .mutualism-card .sym-example { background: #bbf7d0; color: var(--green-dark); }
+
+  .commensalism-card { background: var(--sky-light); border: 2px solid #93c5fd; }
+  .commensalism-card h3 { color: var(--sky); }
+  .commensalism-card .sym-example { background: #bfdbfe; color: var(--sky); }
+
+  /* SUCCESSION */
+  .succession-steps {
+    display: flex;
+    gap: 0;
+    margin-top: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+  .suc-step {
+    flex: 1;
+    min-width: 130px;
+    text-align: center;
+    position: relative;
+  }
+  .suc-step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -10px;
+    top: 28px;
+    font-size: 1.4rem;
+    color: var(--green-mid);
+    z-index: 1;
+  }
+  .suc-dot {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin: 0 auto 0.5rem;
+  }
+  .suc-step h4 { font-size: 0.82rem; font-weight: 800; color: var(--green-dark); }
+  .suc-step p { font-size: 0.75rem; color: var(--text-soft); margin-top: 0.2rem; }
+
+  /* QUIZ */
+  .quiz-container {
+    background: var(--quiz-bg);
+    border: 2px solid #fde68a;
+    border-radius: 20px;
+    padding: 2rem;
+  }
+  .quiz-header { text-align: center; margin-bottom: 2rem; }
+  .quiz-header h2 { color: var(--earth); font-size: 1.8rem; }
+  .quiz-progress {
+    background: #e5e7eb;
+    border-radius: 10px;
+    height: 8px;
+    margin: 1rem auto;
+    max-width: 300px;
+    overflow: hidden;
+  }
+  .quiz-progress-bar {
+    height: 100%;
+    background: var(--green-mid);
+    border-radius: 10px;
+    transition: width 0.4s ease;
+  }
+  .quiz-score {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--earth);
+    margin-top: 0.5rem;
+  }
+
+  .question-block { margin-bottom: 2rem; }
+  .question-block p {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--green-dark);
+  }
+  .question-num {
+    display: inline-block;
+    background: var(--green-mid);
+    color: white;
+    border-radius: 50%;
+    width: 28px; height: 28px;
+    text-align: center;
+    line-height: 28px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    margin-right: 0.5rem;
+  }
+
+  .options { display: grid; gap: 0.5rem; }
+  .option-btn {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    text-align: left;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    color: var(--text);
+  }
+  .option-btn:hover:not(:disabled) { border-color: var(--green-mid); background: var(--green-pale); }
+  .option-btn.correct { border-color: var(--correct); background: #dcfce7; color: var(--correct); }
+  .option-btn.wrong { border-color: var(--wrong); background: #fee2e2; color: var(--wrong); }
+  .option-btn:disabled { cursor: default; }
+
+  .feedback {
+    margin-top: 0.5rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 0.4rem 0.75rem;
+    border-radius: 8px;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.correct-fb { background: #dcfce7; color: var(--correct); }
+  .feedback.wrong-fb { background: #fee2e2; color: var(--wrong); }
+
+  .quiz-result {
+    text-align: center;
+    padding: 2rem;
+    display: none;
+  }
+  .quiz-result.show { display: block; }
+  .result-emoji { font-size: 4rem; }
+  .result-score { font-size: 2.5rem; font-weight: 900; color: var(--green-dark); margin: 0.5rem 0; }
+  .result-msg { font-size: 1rem; color: var(--text-soft); margin-bottom: 1.5rem; }
+  .restart-btn {
+    background: var(--green-mid);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 0.8rem 2rem;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .restart-btn:hover { background: var(--green-dark); }
+
+  /* REFS */
+  .ref-list { list-style: none; }
+  .ref-list li {
+    padding: 0.75rem 1rem 0.75rem 3rem;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    position: relative;
+    font-size: 0.92rem;
+  }
+  .ref-list li::before {
+    content: attr(data-icon);
+    position: absolute;
+    left: 0.75rem;
+    font-size: 1.2rem;
+  }
+  .ref-list a { color: var(--sky); font-weight: 700; }
+
+  /* CALLOUT */
+  .callout {
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 0.93rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .callout-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .callout.fun { background: var(--sky-light); border: 1.5px solid #93c5fd; }
+  .callout.remember { background: var(--earth-light); border: 1.5px solid #fcd34d; }
+
+  /* FOOTER */
+  footer {
+    background: var(--green-dark);
+    color: #a7f3c4;
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.88rem;
+  }
+  footer strong { color: white; }
+
+  @media (max-width: 600px) {
+    .succession-steps { gap: 0; }
+    .suc-step:not(:last-child)::after { right: -8px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#interactions">🌍 Interactions</a>
+  <a href="#ecosystem-levels">🔬 Levels</a>
+  <a href="#feeding">🍃 Food Chains</a>
+  <a href="#symbiosis">🤝 Symbiosis</a>
+  <a href="#energy">⚡ Energy</a>
+  <a href="#succession">🌱 Succession</a>
+  <a href="#quiz">🧠 Quiz</a>
+  <a href="#references">📚 References</a>
+</nav>
+
+<header class="hero">
+  <span class="hero-emoji">🌿🌍🦁</span>
+  <h1>Ecosystems & the Environment</h1>
+  <p>Discover how every living thing on Earth is connected — from tiny bacteria to giant whales!</p>
+  <span class="hero-badge">Grade 7 Science · Interactive Study Guide</span>
+</header>
+
+<!-- ===== INTERACTIONS IN THE ENVIRONMENT ===== -->
+<section id="interactions">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon">🌍</div>
+      <h2>Interactions in the Environment</h2>
+    </div>
+    <p style="margin-bottom:1.5rem; color: var(--text-soft); font-size:0.97rem;">The environment is made of living and non-living parts that constantly interact with each other. Let's understand the big picture first!</p>
+
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-term">🪨 Lithosphere</div>
+        <div class="card-def">The solid mineral material in the biosphere, on Earth — basically all the rocks and soil.</div>
+        <div class="card-example">The soil in your backyard, mountains, and the ocean floor are all part of the lithosphere.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">💧 Hydrosphere</div>
+        <div class="card-def">All the water in the biosphere, on Earth — oceans, lakes, rivers, ice caps, and groundwater.</div>
+        <div class="card-example">The Pacific Ocean, the Amazon River, and even the water in clouds are part of the hydrosphere.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">☁️ Atmosphere</div>
+        <div class="card-def">The air in the biosphere that surrounds Earth — a blanket of gases including oxygen, nitrogen, and carbon dioxide.</div>
+        <div class="card-example">The air you breathe right now is part of the atmosphere. Without it, life on Earth could not exist!</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">🌐 Biosphere</div>
+        <div class="card-def">All the areas on and around Earth that can sustain life — where the lithosphere, hydrosphere, and atmosphere overlap.</div>
+        <div class="card-example">From the deepest ocean trench to the highest cloud, anywhere living things exist is part of the biosphere.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">🌿 Biotic</div>
+        <div class="card-def">The living components of an ecosystem — anything that is alive or was once alive.</div>
+        <div class="card-example">Trees, birds, mushrooms, bacteria, and even dead leaves are biotic factors.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">🪨 Abiotic</div>
+        <div class="card-def">The non-living components of an ecosystem, such as wind, sun, water, soil, and temperature.</div>
+        <div class="card-example">Sunlight, rainfall, the temperature of the air, and the minerals in soil are all abiotic factors.</div>
+      </div>
+
+    </div>
+
+    <div class="callout fun" style="margin-top:1.5rem;">
+      <span class="callout-icon">💡</span>
+      <div><strong>Easy way to remember:</strong> <em>Bio</em> means "life" in Greek. So <strong>Biotic = living</strong>, <strong>Abiotic = NOT living</strong>. The letter "A" at the start means "without" — like "atypical" means not typical!</div>
+    </div>
+
+    <div style="margin-top:2rem;">
+      <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:0.5rem; color:var(--green-dark);">🌦️ Weather vs. Climate</h3>
+      <table class="compare-table">
+        <tr><th>Feature</th><th>Weather</th><th>Climate</th></tr>
+        <tr><td><strong>Definition</strong></td><td>Conditions of the atmosphere in a certain area for a <em>short period</em> of time</td><td>Average weather that an area has over a <em>long period</em> of time</td></tr>
+        <tr><td><strong>Changes?</strong></td><td>Changes constantly — hour to hour, day to day</td><td>Does not generally change (can change over hundreds of years)</td></tr>
+        <tr><td><strong>Example</strong></td><td>"It's raining today in Toronto."</td><td>"Toronto has cold, snowy winters and warm summers."</td></tr>
+        <tr><td><strong>Tool to measure</strong></td><td>Weather forecast / thermometer</td><td>Long-term climate records</td></tr>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== ECOSYSTEM LEVELS ===== -->
+<section id="ecosystem-levels">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon">🔬</div>
+      <h2>Levels of Life in an Ecosystem</h2>
+    </div>
+    <p style="margin-bottom:1.5rem; color:var(--text-soft); font-size:0.97rem;">Scientists organize living things into different levels — from a single living thing all the way up to the entire Earth!</p>
+
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-term">🦔 Organism (Individual)</div>
+        <div class="card-def">A single living thing — could be a plant, animal, fungus, or bacterium.</div>
+        <div class="card-example">One hedgehog in a forest = one organism.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">👥 Population</div>
+        <div class="card-def">A group of organisms of the same species living in the same ecosystem.</div>
+        <div class="card-example">All the hedgehogs living in Sherwood Forest = a population.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">🌐 Community</div>
+        <div class="card-def">A group of different populations interacting in the same ecosystem.</div>
+        <div class="card-example">Hedgehogs + oak trees + foxes + mushrooms in Sherwood Forest = a community.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">🌳 Ecosystem</div>
+        <div class="card-def">All organisms living in a particular area, as well as all the nonliving physical components of the environment with which they interact.</div>
+        <div class="card-example">A pond ecosystem includes fish, frogs, algae, water, mud, sunlight, and air temperature.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">🌵 Biome</div>
+        <div class="card-def">A large region of land with characteristic climate, soil, and organisms.</div>
+        <div class="card-example">The Amazon Rainforest, the Sahara Desert, and the Arctic Tundra are each different biomes.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">🔭 Niche</div>
+        <div class="card-def">The role or "job" of an organism in its ecosystem — what it eats, where it lives, and how it behaves.</div>
+        <div class="card-example">A woodpecker's niche is drilling into trees for insects — no other bird does this the same way.</div>
+      </div>
+
+    </div>
+
+    <div class="callout remember" style="margin-top:1.5rem;">
+      <span class="callout-icon">🧠</span>
+      <div><strong>Memory trick:</strong> Think of it like Russian dolls! Organism → inside a → Population → inside a → Community → inside an → Ecosystem → inside a → Biome → inside the → Biosphere.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FEEDING RELATIONSHIPS ===== -->
+<section id="feeding">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon">🍃</div>
+      <h2>Feeding Relationships</h2>
+    </div>
+    <p style="margin-bottom:1.5rem; color:var(--text-soft); font-size:0.97rem;">Energy flows through ecosystems as organisms eat and get eaten. Here's who eats what!</p>
+
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-term">🌞 Producer</div>
+        <div class="card-def">Plants (and some bacteria) that use energy from the sun to make nutrients they need to survive — through photosynthesis.</div>
+        <div class="card-example">Grass, oak trees, algae, and wheat are all producers. They make the food that everything else depends on!</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">🍽️ Consumer</div>
+        <div class="card-def">Organisms that eat food made by producers. Primary consumers eat plants; secondary consumers eat animals.</div>
+        <div class="card-example">A rabbit (primary) eats grass → A fox (secondary) eats the rabbit.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">🐄 Herbivore</div>
+        <div class="card-def">An animal that eats only plant material.</div>
+        <div class="card-example">Cows, deer, butterflies, and giraffes are herbivores. They are always primary consumers!</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">🦁 Carnivore</div>
+        <div class="card-def">An animal that eats only other animals.</div>
+        <div class="card-example">Lions, sharks, eagles, and owls are carnivores. They usually eat herbivores or other carnivores.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">🐻 Omnivore</div>
+        <div class="card-def">An animal that eats both other animals and plant material.</div>
+        <div class="card-example">Bears eat berries (plant) AND fish (animal). Humans are omnivores too!</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">🦅 Predator</div>
+        <div class="card-def">An organism that catches and eats other organisms of a different species.</div>
+        <div class="card-example">A hawk swooping down to catch a mouse is acting as a predator.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">🐭 Prey</div>
+        <div class="card-def">An organism that is caught and eaten by another organism of a different species.</div>
+        <div class="card-example">The mouse being caught by the hawk is prey. One organism can be both predator AND prey!</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">🦅 Scavenger</div>
+        <div class="card-def">An organism that eats dead or decaying plant or animal matter.</div>
+        <div class="card-example">Vultures, hyenas, and raccoons are scavengers. They clean up the ecosystem!</div>
+      </div>
+
+      <div class="card">
+        <div class="card-term">🍄 Decomposer</div>
+        <div class="card-def">Organisms that break down the cells of dead or waste materials and absorb their nutrients, returning them to the soil.</div>
+        <div class="card-example">Mushrooms, earthworms, and bacteria are decomposers. Without them, dead things would pile up everywhere!</div>
+      </div>
+
+    </div>
+
+    <!-- Food Chain Visual -->
+    <h3 style="margin: 2rem 0 0.5rem; font-size:1.1rem; color:var(--green-dark);">🔗 A Simple Food Chain</h3>
+    <p style="font-size:0.9rem; color:var(--text-soft); margin-bottom:0.5rem;">Energy flows in one direction — from the Sun → Producers → Consumers. The arrow means "eaten by" or "energy passes to."</p>
+    <div class="food-chain">
+      <div class="fc-node">☀️<br><span class="fc-label">Energy Source</span>Sun</div>
+      <div class="fc-arrow">→</div>
+      <div class="fc-node">🌾<br><span class="fc-label">Producer</span>Grass</div>
+      <div class="fc-arrow">→</div>
+      <div class="fc-node">🐛<br><span class="fc-label">Primary Consumer</span>Grasshopper</div>
+      <div class="fc-arrow">→</div>
+      <div class="fc-node">🐸<br><span class="fc-label">Secondary Consumer</span>Frog</div>
+      <div class="fc-arrow">→</div>
+      <div class="fc-node">🐍<br><span class="fc-label">Tertiary Consumer</span>Snake</div>
+      <div class="fc-arrow">→</div>
+      <div class="fc-node">🦅<br><span class="fc-label">Top Predator</span>Eagle</div>
+    </div>
+
+    <div style="margin-top:1.5rem;">
+      <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:0.75rem; color:var(--green-dark);">🕸️ Food Chain vs. Food Web</h3>
+      <table class="compare-table">
+        <tr><th>Feature</th><th>Food Chain</th><th>Food Web</th></tr>
+        <tr><td><strong>Definition</strong></td><td>A <em>sequence</em> of feeding relationships — one path of energy transfer</td><td>A <em>network</em> of all the feeding relationships in an ecosystem</td></tr>
+        <tr><td><strong>Complexity</strong></td><td>Simple — shows just one path</td><td>Complex — shows many overlapping paths</td></tr>
+        <tr><td><strong>Real life?</strong></td><td>A simplification — animals usually eat many things</td><td>More realistic — shows how most ecosystems actually work</td></tr>
+        <tr><td><strong>Analogy</strong></td><td>A single road between two cities</td><td>An entire highway network connecting many cities</td></tr>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== SYMBIOSIS ===== -->
+<section id="symbiosis">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon">🤝</div>
+      <h2>Symbiosis</h2>
+    </div>
+    <div class="card-wide">
+      <div class="card-term">🔗 Symbiosis</div>
+      <div class="card-def">An interaction between two organisms of different species living in close proximity that lasts over time. There are three types!</div>
+    </div>
+
+    <div class="symbiosis-grid">
+      <div class="sym-card parasitism-card">
+        <div class="sym-icon">🦟</div>
+        <h3>Parasitism</h3>
+        <p>One partner is <strong>harmed</strong>, the other <strong>benefits</strong>.<br><em>(-/+)</em></p>
+        <span class="sym-example">A tick on a dog — the tick feeds on the dog's blood (tick wins, dog loses)</span>
+      </div>
+      <div class="sym-card mutualism-card">
+        <div class="sym-icon">🌸</div>
+        <h3>Mutualism</h3>
+        <p>Both partners <strong>benefit</strong>.<br><em>(+/+)</em></p>
+        <span class="sym-example">Bees and flowers — bees get nectar, flowers get pollinated (both win!)</span>
+      </div>
+      <div class="sym-card commensalism-card">
+        <div class="sym-icon">🐟</div>
+        <h3>Commensalism</h3>
+        <p>One partner <strong>benefits</strong>, the other is <strong>unaffected</strong>.<br><em>(+/0)</em></p>
+        <span class="sym-example">Barnacles on a whale — barnacles get transport, whale doesn't care</span>
+      </div>
+    </div>
+
+    <div class="callout fun" style="margin-top:1.5rem;">
+      <span class="callout-icon">🧠</span>
+      <div><strong>Quick memory trick:</strong> <br>
+        <strong>Para</strong>sitism → Para means "beside" but also think "PARA" = one PARAsites, one suffers.<br>
+        <strong>Mutual</strong>ism → "Mutual" literally means "shared between both" — mutual benefit!<br>
+        <strong>Commen</strong>salism → "Com" means together, "mensa" means table (Latin) — one eats at the table, the other doesn't notice.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== ENERGY FLOW ===== -->
+<section id="energy">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon">⚡</div>
+      <h2>Energy Flow & the Energy Pyramid</h2>
+    </div>
+
+    <div class="card-wide">
+      <div class="card-term">☀️ Energy Flow</div>
+      <div class="card-def">The movement of energy, which originally comes from the sun, from one organism to another through a food chain or food web.</div>
+      <div class="card-example">The sun gives energy to grass → a rabbit eats the grass and gets some energy → a fox eats the rabbit and gets some energy.</div>
+    </div>
+
+    <h3 style="margin: 1.5rem 0 0.5rem; font-size:1.1rem; color:var(--green-dark);">🔺 The Energy Pyramid</h3>
+    <p style="font-size:0.9rem; color:var(--text-soft); margin-bottom:1rem;">A pyramid showing the number of organisms at each level of a food chain. The base is wide (many producers), and each level gets smaller because <strong>only about 10% of energy passes to the next level</strong>. The rest is lost as heat!</p>
+
+    <div class="pyramid">
+      <div class="pyramid-level">
+        <div class="pyramid-block" style="width:120px; background:#b91c1c;">🦅 Top Predator</div>
+      </div>
+      <div class="pyramid-level">
+        <div class="pyramid-block" style="width:230px; background:#ea580c;">🐍 Secondary Consumer</div>
+      </div>
+      <div class="pyramid-level">
+        <div class="pyramid-block" style="width:360px; background:#ca8a04;">🐸 Primary Consumer</div>
+      </div>
+      <div class="pyramid-level">
+        <div class="pyramid-block" style="width:500px; background:#16a34a;">🌾 Producers (Plants)</div>
+      </div>
+    </div>
+
+    <div class="callout remember">
+      <span class="callout-icon">⚡</span>
+      <div><strong>The 10% Rule:</strong> When energy moves from one level to the next, only about <strong>10%</strong> is transferred. The other 90% is used by the organism for its own life processes or lost as heat. This is why there are always FAR more plants than herbivores, and far more herbivores than carnivores!</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== SUCCESSION ===== -->
+<section id="succession">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon">🌱</div>
+      <h2>Succession & Sustainability</h2>
+    </div>
+
+    <div class="card-wide">
+      <div class="card-term">🌱 Succession</div>
+      <div class="card-def">The process by which new species gradually replace old species in an ecosystem over time. Think of it as nature's slow renovation!</div>
+    </div>
+
+    <h3 style="margin: 1.5rem 0 0.75rem; font-size:1.05rem; color:var(--green-dark);">Primary Succession — Starting from Scratch</h3>
+    <p style="font-size:0.88rem; color:var(--text-soft); margin-bottom:1rem;">Happens on bare rock with NO soil. Very slow! Takes hundreds of years.</p>
+    <div class="succession-steps">
+      <div class="suc-step">
+        <div class="suc-dot" style="background:#e5e7eb;">🪨</div>
+        <h4>Bare Rock</h4>
+        <p>Lava cools, glacier retreats</p>
+      </div>
+      <div class="suc-step">
+        <div class="suc-dot" style="background:#d1fae5;">🦠</div>
+        <h4>Lichens</h4>
+        <p>First to arrive, break down rock</p>
+      </div>
+      <div class="suc-step">
+        <div class="suc-dot" style="background:#bbf7d0;">🌿</div>
+        <h4>Mosses</h4>
+        <p>Soil starts to form</p>
+      </div>
+      <div class="suc-step">
+        <div class="suc-dot" style="background:#86efac;">🌾</div>
+        <h4>Grasses & Shrubs</h4>
+        <p>Soil getting richer</p>
+      </div>
+      <div class="suc-step">
+        <div class="suc-dot" style="background:#4ade80;">🌲</div>
+        <h4>Young Trees</h4>
+        <p>Forest begins</p>
+      </div>
+      <div class="suc-step">
+        <div class="suc-dot" style="background:#16a34a; color:white;">🌳</div>
+        <h4>Climax Forest</h4>
+        <p>Stable ecosystem</p>
+      </div>
+    </div>
+
+    <div class="card-wide" style="margin-top:1.5rem;">
+      <div class="card-term">🔥 Secondary Succession</div>
+      <div class="card-def">When succession occurs where soil already exists — after a disturbance like a fire, flood, or human clearing. Faster than primary succession because the soil is already there!</div>
+      <div class="card-example">After a forest fire, grasses and wildflowers quickly return because the rich soil is still there. Within decades, a forest can regrow!</div>
+    </div>
+
+    <div class="card-wide" style="margin-top:1.25rem;">
+      <div class="card-term">♻️ Sustainability</div>
+      <div class="card-def">The ability to sustain something — to keep it healthy and continue in the same manner. In ecology, it means using resources in a way that the ecosystem can continue to thrive for future generations.</div>
+      <div class="card-example">Using solar energy instead of burning coal, sustainable fishing limits, and planting trees to replace ones cut down are all examples of sustainability in action.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section id="quiz">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon">🧠</div>
+      <h2>Test Your Knowledge!</h2>
+    </div>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <div style="font-size:2rem;">🌿</div>
+        <h2>Ecosystems Quiz</h2>
+        <p style="font-size:0.9rem; color:var(--earth); margin-top:0.25rem;">10 questions — click an answer to check instantly!</p>
+        <div class="quiz-progress"><div class="quiz-progress-bar" id="progressBar" style="width:0%"></div></div>
+        <div class="quiz-score" id="scoreDisplay">Score: 0 / 0</div>
+      </div>
+
+      <div id="quizQuestions">
+
+        <div class="question-block" data-q="0">
+          <p><span class="question-num">1</span> What is the term for the role or "job" of an organism in its ecosystem?</p>
+          <div class="options">
+            <button class="option-btn" data-correct="false" onclick="answer(this, 0)">Biome</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 0)">Habitat</button>
+            <button class="option-btn" data-correct="true" onclick="answer(this, 0)">Niche</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 0)">Population</button>
+          </div>
+          <div class="feedback" id="fb-0"></div>
+        </div>
+
+        <div class="question-block" data-q="1">
+          <p><span class="question-num">2</span> A lion eats a zebra. The zebra eats grass. What is the grass?</p>
+          <div class="options">
+            <button class="option-btn" data-correct="false" onclick="answer(this, 1)">Consumer</button>
+            <button class="option-btn" data-correct="true" onclick="answer(this, 1)">Producer</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 1)">Decomposer</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 1)">Scavenger</button>
+          </div>
+          <div class="feedback" id="fb-1"></div>
+        </div>
+
+        <div class="question-block" data-q="2">
+          <p><span class="question-num">3</span> Bees collect nectar from flowers, and in doing so they pollinate the flowers. This relationship is an example of:</p>
+          <div class="options">
+            <button class="option-btn" data-correct="false" onclick="answer(this, 2)">Parasitism</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 2)">Commensalism</button>
+            <button class="option-btn" data-correct="true" onclick="answer(this, 2)">Mutualism</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 2)">Predation</button>
+          </div>
+          <div class="feedback" id="fb-2"></div>
+        </div>
+
+        <div class="question-block" data-q="3">
+          <p><span class="question-num">4</span> Which of the following is an ABIOTIC factor?</p>
+          <div class="options">
+            <button class="option-btn" data-correct="false" onclick="answer(this, 3)">A mushroom growing on a log</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 3)">A frog in a pond</button>
+            <button class="option-btn" data-correct="true" onclick="answer(this, 3)">The amount of sunlight hitting a meadow</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 3)">A dead leaf on the ground</button>
+          </div>
+          <div class="feedback" id="fb-3"></div>
+        </div>
+
+        <div class="question-block" data-q="4">
+          <p><span class="question-num">5</span> A vulture feeds on a dead deer carcass. The vulture is acting as a:</p>
+          <div class="options">
+            <button class="option-btn" data-correct="false" onclick="answer(this, 4)">Decomposer</button>
+            <button class="option-btn" data-correct="true" onclick="answer(this, 4)">Scavenger</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 4)">Producer</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 4)">Herbivore</button>
+          </div>
+          <div class="feedback" id="fb-4"></div>
+        </div>
+
+        <div class="question-block" data-q="5">
+          <p><span class="question-num">6</span> Which level of an energy pyramid has the MOST energy available?</p>
+          <div class="options">
+            <button class="option-btn" data-correct="false" onclick="answer(this, 5)">Top predator level</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 5)">Secondary consumer level</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 5)">Primary consumer level</button>
+            <button class="option-btn" data-correct="true" onclick="answer(this, 5)">Producer level</button>
+          </div>
+          <div class="feedback" id="fb-5"></div>
+        </div>
+
+        <div class="question-block" data-q="6">
+          <p><span class="question-num">7</span> After a volcanic eruption covers land with lava, bare rock is left behind. Which type of succession happens next?</p>
+          <div class="options">
+            <button class="option-btn" data-correct="true" onclick="answer(this, 6)">Primary succession</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 6)">Secondary succession</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 6)">Tertiary succession</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 6)">No succession occurs</button>
+          </div>
+          <div class="feedback" id="fb-6"></div>
+        </div>
+
+        <div class="question-block" data-q="7">
+          <p><span class="question-num">8</span> All the hedgehogs in a forest make up a:</p>
+          <div class="options">
+            <button class="option-btn" data-correct="false" onclick="answer(this, 7)">Community</button>
+            <button class="option-btn" data-correct="true" onclick="answer(this, 7)">Population</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 7)">Ecosystem</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 7)">Biome</button>
+          </div>
+          <div class="feedback" id="fb-7"></div>
+        </div>
+
+        <div class="question-block" data-q="8">
+          <p><span class="question-num">9</span> A tapeworm lives inside a dog's intestines and absorbs the dog's nutrients. The dog gets sick. This is an example of:</p>
+          <div class="options">
+            <button class="option-btn" data-correct="false" onclick="answer(this, 8)">Mutualism</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 8)">Commensalism</button>
+            <button class="option-btn" data-correct="true" onclick="answer(this, 8)">Parasitism</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 8)">Predation</button>
+          </div>
+          <div class="feedback" id="fb-8"></div>
+        </div>
+
+        <div class="question-block" data-q="9">
+          <p><span class="question-num">10</span> What is the difference between a food chain and a food web?</p>
+          <div class="options">
+            <button class="option-btn" data-correct="false" onclick="answer(this, 9)">A food chain includes decomposers; a food web does not</button>
+            <button class="option-btn" data-correct="true" onclick="answer(this, 9)">A food chain shows one path of energy; a food web shows a network of many paths</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 9)">A food web only involves plants; a food chain involves all organisms</button>
+            <button class="option-btn" data-correct="false" onclick="answer(this, 9)">They are the same thing</button>
+          </div>
+          <div class="feedback" id="fb-9"></div>
+        </div>
+
+      </div><!-- end quizQuestions -->
+
+      <div class="quiz-result" id="quizResult">
+        <div class="result-emoji" id="resultEmoji">🎉</div>
+        <div class="result-score" id="resultScore">10/10</div>
+        <div class="result-msg" id="resultMsg">Amazing work!</div>
+        <button class="restart-btn" onclick="restartQuiz()">🔄 Try Again</button>
+      </div>
+
+    </div><!-- end quiz-container -->
+  </div>
+</section>
+
+<!-- ===== REFERENCES ===== -->
+<section id="references">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-icon">📚</div>
+      <h2>References & Further Learning</h2>
+    </div>
+    <p style="margin-bottom:1.25rem; color:var(--text-soft); font-size:0.95rem;">Want to explore more? Here are trusted, grade-appropriate resources to deepen your understanding!</p>
+
+    <ul class="ref-list">
+      <li data-icon="🌐"><strong>National Geographic Kids – Ecosystems:</strong> <a href="https://kids.nationalgeographic.com/nature/habitats" target="_blank">kids.nationalgeographic.com</a> — Explore different biomes and habitats with stunning photos and videos.</li>
+      <li data-icon="🎬"><strong>Khan Academy – Ecology:</strong> <a href="https://www.khanacademy.org/science/ap-biology/ecology-ap" target="_blank">khanacademy.org</a> — Free video lessons on food webs, energy flow, and ecosystems. Great for reviewing concepts!</li>
+      <li data-icon="📖"><strong>NASA Climate Kids:</strong> <a href="https://climatekids.nasa.gov" target="_blank">climatekids.nasa.gov</a> — Learn about weather, climate, biomes, and the biosphere from real NASA scientists.</li>
+      <li data-icon="🔬"><strong>Britannica Kids – Ecology:</strong> <a href="https://kids.britannica.com/students/article/ecology/274075" target="_blank">kids.britannica.com</a> — Reliable encyclopedia article on ecology, food chains, and symbiosis.</li>
+      <li data-icon="🎮"><strong>PBS Learning Media – Food Webs:</strong> <a href="https://www.pbslearningmedia.org" target="_blank">pbslearningmedia.org</a> — Interactive games and simulations about food webs, ecosystems, and energy flow.</li>
+      <li data-icon="📺"><strong>BBC Bitesize – Ecosystems & Food Chains:</strong> <a href="https://www.bbc.co.uk/bitesize/topics/zx882hv" target="_blank">bbc.co.uk/bitesize</a> — Written explanations, diagrams, and quizzes on ecosystems, symbiosis, and more.</li>
+      <li data-icon="🌿"><strong>NOAA Ocean Service – Food Webs:</strong> <a href="https://oceanservice.noaa.gov/facts/foodweb.html" target="_blank">oceanservice.noaa.gov</a> — Learn how food webs work in ocean ecosystems from NOAA's scientists.</li>
+    </ul>
+
+    <div class="callout fun" style="margin-top:1.5rem;">
+      <span class="callout-icon">💬</span>
+      <div><strong>Textbook Reference:</strong> This study guide covers concepts typically found in Grade 7 Life Sciences / Ecology units. Common textbooks include <em>Nelson Science Perspectives 7</em>, <em>McGraw-Hill Ryerson Science 7</em>, and <em>CK-12 Earth Science for Middle School</em> (free online at ck12.org).</div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>🌍 <strong>Ecosystems & Interactions in the Environment</strong> — Grade 7 Science Study Guide</p>
+  <p style="margin-top:0.5rem; opacity:0.7;">Created as an educational resource · Always verify with your teacher and textbook · Good luck on your studies! 🌿</p>
+</footer>
+
+<script>
+  let score = 0;
+  let answered = 0;
+  const total = 10;
+  const feedbackMessages = {
+    correct: ["✅ Excellent! That's correct!", "✅ Great job! You got it!", "✅ Perfect! Well done!", "✅ Awesome work!"],
+    wrong: {
+      0: "❌ Not quite! A niche is the specific role or 'job' an organism plays in its ecosystem.",
+      1: "❌ Remember: Producers make their own food using sunlight. Grass is a plant = producer!",
+      2: "❌ Think again! Mutualism means BOTH benefit. Bees get nectar, flowers get pollinated — both win!",
+      3: "❌ Remember: Abiotic = non-living. Sunlight is not alive, so it's abiotic!",
+      4: "❌ Close! A scavenger eats dead animals. Decomposers break them down at a microscopic level.",
+      5: "❌ The PRODUCER level always has the most energy — they capture it directly from the sun!",
+      6: "❌ Primary succession starts on bare rock with no soil. Secondary succession happens where soil already exists.",
+      7: "❌ A population is all individuals of the SAME species in an area. All hedgehogs = one species = population!",
+      8: "❌ In parasitism, one organism benefits and the OTHER is harmed. The tapeworm wins, the dog loses.",
+      9: "❌ A food chain shows ONE linear path. A food web shows MANY interconnected paths of energy flow."
+    }
+  };
+
+  function answer(btn, qIndex) {
+    const block = document.querySelector(`[data-q="${qIndex}"]`);
+    const buttons = block.querySelectorAll('.option-btn');
+    const fb = document.getElementById(`fb-${qIndex}`);
+
+    // Already answered
+    if (btn.disabled) return;
+
+    buttons.forEach(b => b.disabled = true);
+    answered++;
+
+    const isCorrect = btn.dataset.correct === 'true';
+
+    if (isCorrect) {
+      btn.classList.add('correct');
+      score++;
+      const msgs = feedbackMessages.correct;
+      fb.textContent = msgs[Math.floor(Math.random() * msgs.length)];
+      fb.className = 'feedback show correct-fb';
+    } else {
+      btn.classList.add('wrong');
+      fb.textContent = feedbackMessages.wrong[qIndex];
+      fb.className = 'feedback show wrong-fb';
+      // Highlight correct
+      buttons.forEach(b => { if (b.dataset.correct === 'true') b.classList.add('correct'); });
+    }
+
+    document.getElementById('scoreDisplay').textContent = `Score: ${score} / ${answered}`;
+    document.getElementById('progressBar').style.width = `${(answered/total)*100}%`;
+
+    if (answered === total) showResult();
+  }
+
+  function showResult() {
+    setTimeout(() => {
+      document.getElementById('quizQuestions').style.display = 'none';
+      const result = document.getElementById('quizResult');
+      result.classList.add('show');
+      document.getElementById('resultScore').textContent = `${score} / ${total}`;
+
+      let emoji, msg;
+      if (score === 10) { emoji = '🏆'; msg = "Perfect score! You're an ecosystem expert! 🌿"; }
+      else if (score >= 8) { emoji = '🌟'; msg = "Excellent work! You really know your ecosystems!"; }
+      else if (score >= 6) { emoji = '👍'; msg = "Good job! Review the topics you missed and try again!"; }
+      else if (score >= 4) { emoji = '📖'; msg = "Keep studying — re-read the sections and try again!"; }
+      else { emoji = '🌱'; msg = "Don't give up! Review all the sections and you'll improve!"; }
+
+      document.getElementById('resultEmoji').textContent = emoji;
+      document.getElementById('resultMsg').textContent = msg;
+    }, 600);
+  }
+
+  function restartQuiz() {
+    score = 0; answered = 0;
+    document.getElementById('scoreDisplay').textContent = 'Score: 0 / 0';
+    document.getElementById('progressBar').style.width = '0%';
+    document.getElementById('quizResult').classList.remove('show');
+    document.getElementById('quizQuestions').style.display = 'block';
+
+    document.querySelectorAll('.option-btn').forEach(btn => {
+      btn.classList.remove('correct', 'wrong');
+      btn.disabled = false;
+    });
+    document.querySelectorAll('.feedback').forEach(fb => {
+      fb.className = 'feedback';
+      fb.textContent = '';
+    });
+  }
+</script>
+
+</body>
+</html>
