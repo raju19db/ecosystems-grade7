@@ -29,11 +29,13 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
+  html { scroll-behavior: smooth; scroll-padding-top: 96px; }
   body {
     font-family: 'Nunito', sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.7;
+    padding-top: 36px;
   }
 
   /* NAV */
@@ -41,7 +43,7 @@
     background: var(--green-dark);
     padding: 0 2rem;
     position: sticky;
-    top: 0;
+    top: 36px;
     z-index: 100;
     display: flex;
     align-items: center;
@@ -461,7 +463,14 @@
 </head>
 <body>
 
-<nav>
+<!-- SUBJECT SWITCHER -->
+<div style="background:#0f172a;display:flex;align-items:center;gap:.5rem;padding:.45rem 1.25rem;position:fixed;top:0;left:0;right:0;z-index:300;height:36px;">
+  <span style="color:#64748b;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-right:.25rem">Grade 7:</span>
+  <a href="index.html" style="background:#2d7a50;color:#fff;text-decoration:none;font-size:.78rem;font-weight:700;padding:.25rem .85rem;border-radius:20px;">🌿 Science – Ecosystems</a>
+  <a href="math7.html" style="color:#94a3b8;text-decoration:none;font-size:.78rem;font-weight:600;padding:.25rem .85rem;border-radius:20px;transition:color .15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">📐 Mathematics</a>
+</div>
+
+<nav style="top:36px;">
   <a href="#interactions">🌍 Interactions</a>
   <a href="#ecosystem-levels">🔬 Levels</a>
   <a href="#feeding">🍃 Food Chains</a>

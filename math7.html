@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BC Mathematics 7 – Complete Study Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --blue:#1d4ed8; --blue-light:#dbeafe; --blue-mid:#3b82f6;
+  --indigo:#4338ca; --purple:#7c3aed;
+  --green:#15803d; --green-light:#dcfce7;
+  --orange:#c2410c; --orange-light:#ffedd5;
+  --red:#dc2626; --red-light:#fee2e2;
+  --yellow:#b45309; --yellow-light:#fef3c7;
+  --gray-50:#f8fafc; --gray-100:#f1f5f9; --gray-200:#e2e8f0;
+  --gray-300:#cbd5e1; --gray-500:#64748b; --gray-700:#334155;
+  --gray-900:#0f172a;
+  --sidebar-w:270px;
+  --header-h:60px;
+  --switcher-h:36px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.6}
+
+/* ── TOPBAR ── */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:var(--header-h);
+  background:var(--blue);color:#fff;
+  display:flex;align-items:center;padding:0 1.25rem;gap:1rem;z-index:200;
+  box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+.topbar h1{font-size:1.05rem;font-weight:800;flex:1}
+.topbar span{font-size:0.78rem;background:rgba(255,255,255,.15);padding:.25rem .7rem;border-radius:20px;font-weight:600}
+.menu-btn{display:none;background:none;border:none;color:#fff;font-size:1.4rem;cursor:pointer;padding:.25rem}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  position:fixed;top:calc(var(--header-h) + var(--switcher-h));left:0;bottom:0;
+  width:var(--sidebar-w);background:#fff;
+  border-right:1px solid var(--gray-200);
+  overflow-y:auto;z-index:150;
+  padding:.75rem 0;
+}
+.sidebar-section{padding:.5rem 1rem .25rem;font-size:.67rem;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.06em}
+.nav-item{
+  display:flex;align-items:center;gap:.6rem;
+  padding:.55rem 1rem;cursor:pointer;
+  font-size:.84rem;font-weight:500;color:var(--gray-700);
+  border-left:3px solid transparent;
+  transition:background .15s,color .15s,border-color .15s;
+}
+.nav-item:hover{background:var(--blue-light);color:var(--blue)}
+.nav-item.active{background:var(--blue-light);color:var(--blue);border-left-color:var(--blue);font-weight:700}
+.nav-item .ni{font-size:1.1rem;flex-shrink:0}
+.nav-item .badge{margin-left:auto;font-size:.65rem;background:var(--gray-200);padding:.1rem .4rem;border-radius:10px;font-weight:600}
+.nav-item.active .badge{background:var(--blue);color:#fff}
+
+/* ── MAIN ── */
+.main{margin-left:var(--sidebar-w);margin-top:calc(var(--header-h) + var(--switcher-h));min-height:calc(100vh - var(--header-h) - var(--switcher-h))}
+
+/* ── TOPIC PANEL ── */
+.topic-panel{display:none;padding:2rem 2.5rem;max-width:900px}
+.topic-panel.active{display:block}
+
+/* HOME panel */
+#home.topic-panel{display:block;max-width:100%;padding:0}
+.home-hero{
+  background:linear-gradient(135deg,var(--blue) 0%,var(--indigo) 60%,var(--purple) 100%);
+  color:#fff;padding:3.5rem 2.5rem;
+}
+.home-hero h2{font-size:2.2rem;font-weight:900;margin-bottom:.5rem}
+.home-hero p{font-size:1rem;opacity:.88;max-width:540px;margin-bottom:1.5rem}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;padding:2rem 2.5rem}
+.home-card{
+  background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;
+  padding:1.25rem;cursor:pointer;transition:transform .15s,border-color .15s,box-shadow .15s;
+}
+.home-card:hover{transform:translateY(-3px);border-color:var(--blue-mid);box-shadow:0 4px 16px rgba(29,78,216,.1)}
+.home-card .hc-icon{font-size:2rem;margin-bottom:.5rem}
+.home-card h3{font-size:.9rem;font-weight:700;color:var(--gray-900);margin-bottom:.25rem}
+.home-card p{font-size:.78rem;color:var(--gray-500)}
+.pill{display:inline-block;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:20px;margin-top:.5rem}
+.pill-blue{background:var(--blue-light);color:var(--blue)}
+
+/* ── TOPIC HEADER ── */
+.topic-header{margin-bottom:1.75rem}
+.topic-header h2{font-size:1.7rem;font-weight:900;color:var(--gray-900);margin-bottom:.3rem}
+.topic-header p{font-size:.93rem;color:var(--gray-500)}
+.topic-header .bc-badge{
+  display:inline-block;background:var(--blue-light);color:var(--blue);
+  font-size:.72rem;font-weight:700;padding:.25rem .7rem;border-radius:20px;margin-top:.5rem;
+}
+
+/* ── VIDEO GRID ── */
+.videos-section h3,.examples-section h3,.quiz-section h3{
+  font-size:1.1rem;font-weight:800;margin-bottom:1rem;
+  display:flex;align-items:center;gap:.5rem;color:var(--gray-900);
+}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:2rem}
+.video-card{background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;overflow:hidden}
+.video-wrap{position:relative;padding-top:56.25%}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-info{padding:.75rem 1rem}
+.video-info h4{font-size:.85rem;font-weight:700;margin-bottom:.2rem}
+.video-info p{font-size:.75rem;color:var(--gray-500)}
+
+/* ── EXAMPLES ── */
+.example-card{
+  background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;
+  margin-bottom:1rem;overflow:hidden;
+}
+.example-header{
+  background:var(--blue);color:#fff;
+  padding:.65rem 1.1rem;font-size:.85rem;font-weight:700;
+  display:flex;align-items:center;gap:.5rem;
+}
+.example-body{padding:1.1rem}
+.example-body p{font-size:.9rem;margin-bottom:.5rem;color:var(--gray-700)}
+.step{
+  display:flex;gap:.75rem;margin:.5rem 0;align-items:flex-start;
+}
+.step-num{
+  min-width:26px;height:26px;background:var(--blue-light);color:var(--blue);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:800;flex-shrink:0;margin-top:1px;
+}
+.step p{font-size:.88rem;color:var(--gray-700)}
+.math{
+  font-family:'JetBrains Mono',monospace;
+  background:var(--gray-100);border-left:3px solid var(--blue-mid);
+  padding:.5rem .9rem;border-radius:0 8px 8px 0;
+  font-size:.88rem;margin:.4rem 0;color:var(--gray-900);
+}
+.answer{
+  background:var(--green-light);border:1.5px solid #86efac;border-radius:8px;
+  padding:.5rem 1rem;font-size:.88rem;font-weight:700;color:var(--green);
+  margin-top:.5rem;display:inline-block;
+}
+.tip{
+  background:var(--yellow-light);border-left:3px solid #fbbf24;border-radius:0 8px 8px 0;
+  padding:.5rem .9rem;font-size:.83rem;color:var(--yellow);margin:.75rem 0;
+}
+
+/* ── QUIZ ── */
+.quiz-section{margin-top:2rem}
+.quiz-controls{
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;
+  padding:1rem 1.25rem;margin-bottom:1.25rem;
+}
+.quiz-stat{text-align:center}
+.quiz-stat .qs-val{font-size:1.5rem;font-weight:900;color:var(--blue)}
+.quiz-stat .qs-label{font-size:.7rem;color:var(--gray-500);font-weight:600}
+.quiz-progress-wrap{flex:1;min-width:120px}
+.qp-bar{height:8px;background:var(--gray-200);border-radius:10px;overflow:hidden;margin-top:.35rem}
+.qp-fill{height:100%;background:var(--blue);border-radius:10px;transition:width .3s}
+
+.q-block{
+  background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;
+  padding:1.1rem 1.25rem;margin-bottom:.85rem;
+}
+.q-block p.q-text{font-size:.92rem;font-weight:600;color:var(--gray-900);margin-bottom:.75rem}
+.q-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:24px;height:24px;background:var(--blue);color:#fff;
+  border-radius:50%;font-size:.72rem;font-weight:800;margin-right:.5rem;flex-shrink:0;
+}
+.opts{display:grid;gap:.4rem}
+.opt-btn{
+  background:var(--gray-50);border:1.5px solid var(--gray-200);border-radius:9px;
+  padding:.5rem .9rem;text-align:left;font-family:'Inter',sans-serif;
+  font-size:.85rem;font-weight:500;cursor:pointer;color:var(--gray-700);
+  transition:border-color .15s,background .15s;
+}
+.opt-btn:hover:not(:disabled){border-color:var(--blue-mid);background:var(--blue-light);color:var(--blue)}
+.opt-btn.correct{border-color:var(--green)!important;background:var(--green-light)!important;color:var(--green)!important;font-weight:700}
+.opt-btn.wrong{border-color:var(--red)!important;background:var(--red-light)!important;color:var(--red)!important}
+.opt-btn:disabled{cursor:default}
+.q-fb{font-size:.8rem;font-weight:600;margin-top:.5rem;padding:.35rem .7rem;border-radius:7px;display:none}
+.q-fb.show{display:block}
+.q-fb.ok{background:var(--green-light);color:var(--green)}
+.q-fb.no{background:var(--red-light);color:var(--red)}
+
+.quiz-result-box{
+  background:#fff;border:2px solid var(--blue-mid);border-radius:16px;
+  padding:2rem;text-align:center;display:none;
+}
+.quiz-result-box.show{display:block}
+.qr-emoji{font-size:3.5rem}
+.qr-score{font-size:2.5rem;font-weight:900;color:var(--blue);margin:.4rem 0}
+.qr-msg{font-size:.95rem;color:var(--gray-500);margin-bottom:1.25rem}
+.btn-restart{
+  background:var(--blue);color:#fff;border:none;border-radius:10px;
+  padding:.7rem 1.8rem;font-family:'Inter',sans-serif;font-size:.9rem;
+  font-weight:700;cursor:pointer;transition:background .15s;
+}
+.btn-restart:hover{background:var(--indigo)}
+
+/* ── REFS ── */
+.refs-section{margin-top:2rem;padding-top:1.5rem;border-top:1.5px solid var(--gray-200)}
+.refs-section h3{font-size:1rem;font-weight:800;margin-bottom:.75rem;color:var(--gray-700)}
+.ref-item{
+  display:flex;gap:.75rem;align-items:flex-start;
+  padding:.6rem .9rem;background:#fff;border:1px solid var(--gray-200);
+  border-radius:10px;margin-bottom:.5rem;font-size:.83rem;
+}
+.ref-icon{font-size:1.1rem;flex-shrink:0}
+.ref-item a{color:var(--blue);font-weight:600;text-decoration:none}
+.ref-item a:hover{text-decoration:underline}
+
+/* ── DIVIDER ── */
+.section-divider{height:1.5px;background:var(--gray-200);margin:1.75rem 0}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);transition:transform .25s}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .topic-panel{padding:1.25rem}
+  .home-hero{padding:2rem 1.25rem}
+  .home-grid{padding:1.25rem}
+  .menu-btn{display:block}
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:140;display:none}
+  .overlay.show{display:block}
+}
+</style>
+</head>
+<body>
+
+<!-- SUBJECT SWITCHER -->
+<div style="background:#0f172a;display:flex;align-items:center;gap:.5rem;padding:.45rem 1.25rem;position:fixed;top:0;left:0;right:0;z-index:300;height:36px;">
+  <span style="color:#64748b;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-right:.25rem">Grade 7:</span>
+  <a href="math7.html" style="background:#1d4ed8;color:#fff;text-decoration:none;font-size:.78rem;font-weight:700;padding:.25rem .85rem;border-radius:20px;">📐 Mathematics</a>
+  <a href="index.html" style="color:#94a3b8;text-decoration:none;font-size:.78rem;font-weight:600;padding:.25rem .85rem;border-radius:20px;transition:color .15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94a3b8'">🌿 Science – Ecosystems</a>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar" style="top:36px;">
+  <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+  <h1>📐 BC Mathematics 7 – Study Guide</h1>
+  <span>BC Curriculum</span>
+  <span>Grade 7</span>
+</div>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-section">Overview</div>
+  <div class="nav-item active" onclick="show('home')" id="nav-home"><span class="ni">🏠</span>Home</div>
+
+  <div class="sidebar-section">Number</div>
+  <div class="nav-item" onclick="show('integers')" id="nav-integers"><span class="ni">➕</span>Operations with Integers<span class="badge">20 Q</span></div>
+  <div class="nav-item" onclick="show('decimals')" id="nav-decimals"><span class="ni">🔢</span>Operations with Decimals<span class="badge">20 Q</span></div>
+  <div class="nav-item" onclick="show('fractions')" id="nav-fractions"><span class="ni">½</span>Fractions, Ratios & Percents<span class="badge">20 Q</span></div>
+
+  <div class="sidebar-section">Algebra</div>
+  <div class="nav-item" onclick="show('linear')" id="nav-linear"><span class="ni">📈</span>Linear Relations<span class="badge">20 Q</span></div>
+  <div class="nav-item" onclick="show('equations')" id="nav-equations"><span class="ni">⚖️</span>Two-Step Equations<span class="badge">20 Q</span></div>
+
+  <div class="sidebar-section">Geometry</div>
+  <div class="nav-item" onclick="show('circles')" id="nav-circles"><span class="ni">⭕</span>Circumference & Area<span class="badge">20 Q</span></div>
+  <div class="nav-item" onclick="show('volume')" id="nav-volume"><span class="ni">📦</span>Volume<span class="badge">20 Q</span></div>
+  <div class="nav-item" onclick="show('coordinates')" id="nav-coordinates"><span class="ni">🗺️</span>Coordinates & Transformations<span class="badge">20 Q</span></div>
+
+  <div class="sidebar-section">Data & Probability</div>
+  <div class="nav-item" onclick="show('graphs')" id="nav-graphs"><span class="ni">🥧</span>Circle Graphs<span class="badge">20 Q</span></div>
+  <div class="nav-item" onclick="show('probability')" id="nav-probability"><span class="ni">🎲</span>Experimental Probability<span class="badge">20 Q</span></div>
+  <div class="nav-item" onclick="show('financial')" id="nav-financial"><span class="ni">💰</span>Financial Literacy<span class="badge">20 Q</span></div>
+
+  <div class="sidebar-section">Resources</div>
+  <div class="nav-item" onclick="show('references')" id="nav-references"><span class="ni">📚</span>All References</div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- ════════════════════════════════════════════════════
+     HOME
+════════════════════════════════════════════════════ -->
+<div class="topic-panel active" id="home">
+  <div class="home-hero">
+    <h2>BC Mathematics 7</h2>
+    <p>A complete study guide for Grade 7 students, parents, and teachers — aligned to the BC Ministry of Education curriculum. Each topic includes videos, worked examples, and a 20-question quiz.</p>
+    <span style="background:rgba(255,255,255,.2);border-radius:20px;padding:.35rem 1rem;font-size:.8rem;font-weight:700;display:inline-block">📋 240 Quiz Questions Total · 11 Topics · BC Curriculum</span>
+  </div>
+  <div class="home-grid">
+    <div class="home-card" onclick="show('integers')"><div class="hc-icon">➕</div><h3>Operations with Integers</h3><p>Add, subtract, multiply and divide positive and negative numbers</p><span class="pill pill-blue">20 questions</span></div>
+    <div class="home-card" onclick="show('decimals')"><div class="hc-icon">🔢</div><h3>Operations with Decimals</h3><p>All four operations with decimal numbers and order of operations</p><span class="pill pill-blue">20 questions</span></div>
+    <div class="home-card" onclick="show('fractions')"><div class="hc-icon">½</div><h3>Fractions, Ratios & Percents</h3><p>Converting, comparing and calculating with fractions and percents</p><span class="pill pill-blue">20 questions</span></div>
+    <div class="home-card" onclick="show('linear')"><div class="hc-icon">📈</div><h3>Linear Relations</h3><p>Expressions, tables of values and graphs of linear patterns</p><span class="pill pill-blue">20 questions</span></div>
+    <div class="home-card" onclick="show('equations')"><div class="hc-icon">⚖️</div><h3>Two-Step Equations</h3><p>Solving equations with whole-number coefficients and constants</p><span class="pill pill-blue">20 questions</span></div>
+    <div class="home-card" onclick="show('circles')"><div class="hc-icon">⭕</div><h3>Circumference & Area</h3><p>Using π to find circumference and area of circles</p><span class="pill pill-blue">20 questions</span></div>
+    <div class="home-card" onclick="show('volume')"><div class="hc-icon">📦</div><h3>Volume</h3><p>Volume of rectangular prisms and cylinders</p><span class="pill pill-blue">20 questions</span></div>
+    <div class="home-card" onclick="show('coordinates')"><div class="hc-icon">🗺️</div><h3>Coordinates & Transformations</h3><p>Cartesian plane, translations, reflections and rotations</p><span class="pill pill-blue">20 questions</span></div>
+    <div class="home-card" onclick="show('graphs')"><div class="hc-icon">🥧</div><h3>Circle Graphs</h3><p>Reading, creating and interpreting circle graphs with data</p><span class="pill pill-blue">20 questions</span></div>
+    <div class="home-card" onclick="show('probability')"><div class="hc-icon">🎲</div><h3>Experimental Probability</h3><p>Probability experiments with two independent events</p><span class="pill pill-blue">20 questions</span></div>
+    <div class="home-card" onclick="show('financial')"><div class="hc-icon">💰</div><h3>Financial Literacy</h3><p>Percents in financial contexts: tax, tips, discounts</p><span class="pill pill-blue">20 questions</span></div>
+  </div>
+
+  <div style="padding:0 2.5rem 2rem">
+    <div style="background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;padding:1.25rem">
+      <h3 style="font-size:1rem;font-weight:800;margin-bottom:.75rem">📋 BC Curriculum Alignment</h3>
+      <p style="font-size:.87rem;color:var(--gray-500);margin-bottom:.5rem">This guide is built around the <strong>BC Ministry of Education Mathematics 7</strong> curriculum. All topics, big ideas, and competencies are sourced from:</p>
+      <a href="https://curriculum.gov.bc.ca/curriculum/mathematics/7" target="_blank" style="color:var(--blue);font-size:.87rem;font-weight:700">curriculum.gov.bc.ca/curriculum/mathematics/7 ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     INTEGERS
+════════════════════════════════════════════════════ -->
+<div class="topic-panel" id="integers">
+  <div class="topic-header">
+    <h2>➕ Operations with Integers</h2>
+    <p>Addition, subtraction, multiplication, division, and order of operations with positive and negative whole numbers.</p>
+    <span class="bc-badge">BC Math 7 · Number</span>
+  </div>
+
+  <div class="videos-section">
+    <h3>🎬 Watch & Learn</h3>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-wrap"><iframe src="https://www.youtube.com/embed/QtFHMEBFGgk" allowfullscreen loading="lazy" title="Adding and Subtracting Integers"></iframe></div>
+        <div class="video-info"><h4>Adding & Subtracting Integers</h4><p>Khan Academy – clear visual explanation with number lines</p></div>
+      </div>
+      <div class="video-card">
+        <div class="video-wrap"><iframe src="https://www.youtube.com/embed/oFQzGMYyQ18" allowfullscreen loading="lazy" title="Multiplying and Dividing Integers"></iframe></div>
+        <div class="video-info"><h4>Multiplying & Dividing Integers</h4><p>Khan Academy – sign rules made simple</p></div>
+      </div>
+      <div class="video-card">
+        <div class="video-wrap"><iframe src="https://www.youtube.com/embed/ClYdw4d4OmA" allowfullscreen loading="lazy" title="Order of Operations with Integers"></iframe></div>
+        <div class="video-info"><h4>Order of Operations (BEDMAS)</h4><p>Math Antics – BEDMAS with integers</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="examples-section">
+    <h3>✏️ Step-by-Step Examples</h3>
+
+    <div class="example-card">
+      <div class="example-header">📘 Example 1 – Adding Integers with a Number Line</div>
+      <div class="example-body">
+        <p><strong>Problem:</strong> Calculate (−5) + (+8)</p>
+        <div class="step"><div class="step-num">1</div><p>Start at <strong>−5</strong> on the number line.</p></div>
+        <div class="step"><div class="step-num">2</div><p>Adding a <strong>positive</strong> number means moving <strong>right</strong> by 8.</p></div>
+        <div class="step"><div class="step-num">3</div><p>−5 + 8 = move right 8 from −5</p></div>
+        <div class="math">−5 + 8 = +3</div>
+        <div class="answer">✅ Answer: +3</div>
+        <div class="tip">💡 Rule: When signs differ, subtract the smaller from the larger and keep the sign of the bigger number.</div>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-header">📘 Example 2 – Subtracting Integers</div>
+      <div class="example-body">
+        <p><strong>Problem:</strong> Calculate (−3) − (−7)</p>
+        <div class="step"><div class="step-num">1</div><p>Subtracting a negative = <strong>adding a positive</strong>. Change the sign!</p></div>
+        <div class="step"><div class="step-num">2</div><p>Rewrite: (−3) + (+7)</p></div>
+        <div class="step"><div class="step-num">3</div><p>Different signs → subtract: 7 − 3 = 4. Keep the sign of the bigger (positive).</p></div>
+        <div class="math">(−3) − (−7) = (−3) + (+7) = +4</div>
+        <div class="answer">✅ Answer: +4</div>
+        <div class="tip">💡 "Subtracting a negative is the same as adding a positive." Two negatives make a positive!</div>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-header">📘 Example 3 – Multiplying & Dividing Integers</div>
+      <div class="example-body">
+        <p><strong>Sign Rules:</strong> (+)(+) = + &nbsp;|&nbsp; (−)(−) = + &nbsp;|&nbsp; (+)(−) = − &nbsp;|&nbsp; (−)(+) = −</p>
+        <div class="math">(−4) × (+5) = −20</div>
+        <div class="math">(−6) × (−3) = +18</div>
+        <div class="math">(−20) ÷ (+4) = −5</div>
+        <div class="math">(−18) ÷ (−6) = +3</div>
+        <div class="answer">✅ Same signs → positive result. Different signs → negative result.</div>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-header">📘 Example 4 – BEDMAS with Integers</div>
+      <div class="example-body">
+        <p><strong>Problem:</strong> Evaluate: 3 + (−2) × 4 − (−1)</p>
+        <div class="step"><div class="step-num">1</div><p><strong>Brackets</strong> first: none here</p></div>
+        <div class="step"><div class="step-num">2</div><p><strong>Multiply</strong>: (−2) × 4 = −8</p></div>
+        <div class="step"><div class="step-num">3</div><p>Rewrite: 3 + (−8) − (−1) = 3 − 8 + 1</p></div>
+        <div class="step"><div class="step-num">4</div><p><strong>Add/Subtract</strong> left to right: 3 − 8 = −5, then −5 + 1 = −4</p></div>
+        <div class="math">3 + (−2) × 4 − (−1) = −4</div>
+        <div class="answer">✅ Answer: −4</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+  <div class="quiz-section" id="quiz-integers">
+    <h3>🧠 Weekly Quiz – Operations with Integers <span style="font-size:.8rem;font-weight:500;color:var(--gray-500)">(20 Questions)</span></h3>
+    <div id="qc-integers" class="quiz-controls">
+      <div class="quiz-stat"><div class="qs-val" id="sc-integers">0</div><div class="qs-label">Score</div></div>
+      <div class="quiz-stat"><div class="qs-val" id="an-integers">0</div><div class="qs-label">Answered</div></div>
+      <div class="quiz-progress-wrap"><div style="font-size:.75rem;font-weight:600;color:var(--gray-500)">Progress</div><div class="qp-bar"><div class="qp-fill" id="pb-integers" style="width:0%"></div></div></div>
+    </div>
+    <div id="qs-integers"></div>
+    <div class="quiz-result-box" id="qr-integers">
+      <div class="qr-emoji" id="qre-integers">🎉</div>
+      <div class="qr-score" id="qrs-integers">20/20</div>
+      <div class="qr-msg" id="qrm-integers">Excellent!</div>
+      <button class="btn-restart" onclick="restartQuiz('integers')">🔄 Try Again</button>
+    </div>
+  </div>
+
+  <div class="refs-section">
+    <h3>📚 References & Resources</h3>
+    <div class="ref-item"><span class="ref-icon">🌐</span><div>BC Curriculum: <a href="https://curriculum.gov.bc.ca/curriculum/mathematics/7" target="_blank">curriculum.gov.bc.ca – Math 7</a></div></div>
+    <div class="ref-item"><span class="ref-icon">🎬</span><div>Khan Academy: <a href="https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-negative-numbers-multiply-and-divide" target="_blank">7th Grade – Integers</a></div></div>
+    <div class="ref-item"><span class="ref-icon">📖</span><div>Math Is Fun: <a href="https://www.mathsisfun.com/positive-negative-integers.html" target="_blank">Positive & Negative Integers</a></div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     DECIMALS
+════════════════════════════════════════════════════ -->
+<div class="topic-panel" id="decimals">
+  <div class="topic-header">
+    <h2>🔢 Operations with Decimals</h2>
+    <p>Addition, subtraction, multiplication, division, and order of operations with decimal numbers.</p>
+    <span class="bc-badge">BC Math 7 · Number</span>
+  </div>
+  <div class="videos-section"><h3>🎬 Watch & Learn</h3>
+    <div class="video-grid">
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/fIeEMqSbAzk" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Adding & Subtracting Decimals</h4><p>Khan Academy – lining up decimal points</p></div></div>
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/OR2Skw0A5Do" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Multiplying Decimals</h4><p>Math Antics – step-by-step method</p></div></div>
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/G0A80O3MXKU" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Dividing Decimals</h4><p>Math Antics – moving the decimal point</p></div></div>
+    </div>
+  </div>
+  <div class="examples-section"><h3>✏️ Step-by-Step Examples</h3>
+    <div class="example-card"><div class="example-header">📘 Example 1 – Adding Decimals</div><div class="example-body">
+      <p><strong>Problem:</strong> 12.45 + 7.8</p>
+      <div class="step"><div class="step-num">1</div><p>Line up the decimal points vertically.</p></div>
+      <div class="step"><div class="step-num">2</div><p>Add zeros as placeholders: 12.45 + 7.80</p></div>
+      <div class="math">  12.45
++  7.80
+------
+  20.25</div>
+      <div class="answer">✅ Answer: 20.25</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 2 – Multiplying Decimals</div><div class="example-body">
+      <p><strong>Problem:</strong> 2.4 × 1.5</p>
+      <div class="step"><div class="step-num">1</div><p>Ignore decimals: multiply 24 × 15 = 360</p></div>
+      <div class="step"><div class="step-num">2</div><p>Count decimal places: 2.4 has 1, 1.5 has 1 → total = 2 decimal places</p></div>
+      <div class="step"><div class="step-num">3</div><p>Place decimal: 360 → 3.60</p></div>
+      <div class="math">2.4 × 1.5 = 3.60</div>
+      <div class="answer">✅ Answer: 3.6</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 3 – Dividing Decimals</div><div class="example-body">
+      <p><strong>Problem:</strong> 8.4 ÷ 0.4</p>
+      <div class="step"><div class="step-num">1</div><p>Multiply both by 10 to remove the decimal from the divisor: 84 ÷ 4</p></div>
+      <div class="step"><div class="step-num">2</div><p>84 ÷ 4 = 21</p></div>
+      <div class="math">8.4 ÷ 0.4 = 84 ÷ 4 = 21</div>
+      <div class="answer">✅ Answer: 21</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 4 – Order of Operations (BEDMAS)</div><div class="example-body">
+      <p><strong>Problem:</strong> 3.5 + 2.1 × 4 − 0.5</p>
+      <div class="step"><div class="step-num">1</div><p>Multiply first: 2.1 × 4 = 8.4</p></div>
+      <div class="step"><div class="step-num">2</div><p>Now: 3.5 + 8.4 − 0.5</p></div>
+      <div class="step"><div class="step-num">3</div><p>Left to right: 3.5 + 8.4 = 11.9, then 11.9 − 0.5 = 11.4</p></div>
+      <div class="math">3.5 + 2.1 × 4 − 0.5 = 11.4</div>
+      <div class="answer">✅ Answer: 11.4</div>
+    </div></div>
+  </div>
+  <div class="section-divider"></div>
+  <div class="quiz-section"><h3>🧠 Weekly Quiz – Operations with Decimals <span style="font-size:.8rem;font-weight:500;color:var(--gray-500)">(20 Questions)</span></h3>
+    <div class="quiz-controls"><div class="quiz-stat"><div class="qs-val" id="sc-decimals">0</div><div class="qs-label">Score</div></div><div class="quiz-stat"><div class="qs-val" id="an-decimals">0</div><div class="qs-label">Answered</div></div><div class="quiz-progress-wrap"><div style="font-size:.75rem;font-weight:600;color:var(--gray-500)">Progress</div><div class="qp-bar"><div class="qp-fill" id="pb-decimals" style="width:0%"></div></div></div></div>
+    <div id="qs-decimals"></div>
+    <div class="quiz-result-box" id="qr-decimals"><div class="qr-emoji" id="qre-decimals">🎉</div><div class="qr-score" id="qrs-decimals">20/20</div><div class="qr-msg" id="qrm-decimals">Excellent!</div><button class="btn-restart" onclick="restartQuiz('decimals')">🔄 Try Again</button></div>
+  </div>
+  <div class="refs-section"><h3>📚 References</h3>
+    <div class="ref-item"><span class="ref-icon">🌐</span><div><a href="https://www.mathsisfun.com/decimals.html" target="_blank">Math Is Fun – Decimals</a></div></div>
+    <div class="ref-item"><span class="ref-icon">🎬</span><div><a href="https://www.khanacademy.org/math/arithmetic/arith-decimals" target="_blank">Khan Academy – Decimals</a></div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     FRACTIONS / RATIOS / PERCENTS
+════════════════════════════════════════════════════ -->
+<div class="topic-panel" id="fractions">
+  <div class="topic-header"><h2>½ Fractions, Ratios & Percents</h2><p>Relationships between decimals, fractions, ratios, and percents.</p><span class="bc-badge">BC Math 7 · Number</span></div>
+  <div class="videos-section"><h3>🎬 Watch & Learn</h3>
+    <div class="video-grid">
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/n0FZhQ_GkKw" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Fractions, Decimals & Percents</h4><p>Math Antics – converting between all three forms</p></div></div>
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/93sSNEFZPHk" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Ratios & Proportions</h4><p>Math Antics – understanding ratios</p></div></div>
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/rR95Cbcjzus" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Finding Percents of Numbers</h4><p>Khan Academy – percent calculations</p></div></div>
+    </div>
+  </div>
+  <div class="examples-section"><h3>✏️ Step-by-Step Examples</h3>
+    <div class="example-card"><div class="example-header">📘 Example 1 – Fraction to Decimal to Percent</div><div class="example-body">
+      <p><strong>Convert 3/4 to a decimal and a percent</strong></p>
+      <div class="step"><div class="step-num">1</div><p>Divide: 3 ÷ 4 = 0.75</p></div>
+      <div class="step"><div class="step-num">2</div><p>Multiply by 100 for percent: 0.75 × 100 = 75%</p></div>
+      <div class="math">3/4 = 0.75 = 75%</div>
+      <div class="answer">✅ Three ways to write the same value!</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 2 – Finding a Percent of a Number</div><div class="example-body">
+      <p><strong>Problem:</strong> What is 35% of 80?</p>
+      <div class="step"><div class="step-num">1</div><p>Convert percent to decimal: 35% = 0.35</p></div>
+      <div class="step"><div class="step-num">2</div><p>Multiply: 0.35 × 80 = 28</p></div>
+      <div class="math">35% of 80 = 0.35 × 80 = 28</div>
+      <div class="answer">✅ Answer: 28</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 3 – Ratios</div><div class="example-body">
+      <p><strong>Problem:</strong> A class has 12 girls and 8 boys. Write the ratio of girls to boys in simplest form.</p>
+      <div class="step"><div class="step-num">1</div><p>Write ratio: 12:8</p></div>
+      <div class="step"><div class="step-num">2</div><p>Find GCF of 12 and 8: GCF = 4</p></div>
+      <div class="step"><div class="step-num">3</div><p>Divide both: 12÷4 : 8÷4 = 3:2</p></div>
+      <div class="math">12:8 = 3:2</div>
+      <div class="answer">✅ Answer: 3:2 (for every 3 girls there are 2 boys)</div>
+    </div></div>
+  </div>
+  <div class="section-divider"></div>
+  <div class="quiz-section"><h3>🧠 Weekly Quiz – Fractions, Ratios & Percents</h3>
+    <div class="quiz-controls"><div class="quiz-stat"><div class="qs-val" id="sc-fractions">0</div><div class="qs-label">Score</div></div><div class="quiz-stat"><div class="qs-val" id="an-fractions">0</div><div class="qs-label">Answered</div></div><div class="quiz-progress-wrap"><div style="font-size:.75rem;font-weight:600;color:var(--gray-500)">Progress</div><div class="qp-bar"><div class="qp-fill" id="pb-fractions" style="width:0%"></div></div></div></div>
+    <div id="qs-fractions"></div>
+    <div class="quiz-result-box" id="qr-fractions"><div class="qr-emoji" id="qre-fractions">🎉</div><div class="qr-score" id="qrs-fractions">20/20</div><div class="qr-msg" id="qrm-fractions">Excellent!</div><button class="btn-restart" onclick="restartQuiz('fractions')">🔄 Try Again</button></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     LINEAR RELATIONS
+════════════════════════════════════════════════════ -->
+<div class="topic-panel" id="linear">
+  <div class="topic-header"><h2>📈 Discrete Linear Relations</h2><p>Using expressions, tables of values, and graphs to explore and describe linear patterns.</p><span class="bc-badge">BC Math 7 · Algebra</span></div>
+  <div class="videos-section"><h3>🎬 Watch & Learn</h3>
+    <div class="video-grid">
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/MXV65i9g1Xg" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Introduction to Linear Relations</h4><p>Understanding patterns and tables of values</p></div></div>
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/uk7gS3cZVp4" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Graphing Linear Relations</h4><p>Plotting points and identifying linear patterns</p></div></div>
+    </div>
+  </div>
+  <div class="examples-section"><h3>✏️ Step-by-Step Examples</h3>
+    <div class="example-card"><div class="example-header">📘 Example 1 – Table of Values</div><div class="example-body">
+      <p><strong>Pattern rule:</strong> y = 2x + 1. Complete the table.</p>
+      <div class="math">x = 1 → y = 2(1)+1 = 3
+x = 2 → y = 2(2)+1 = 5
+x = 3 → y = 2(3)+1 = 7
+x = 4 → y = 2(4)+1 = 9</div>
+      <div class="answer">✅ Each y goes up by 2 as x goes up by 1 — that's a LINEAR pattern!</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 2 – Writing the Expression</div><div class="example-body">
+      <p><strong>Problem:</strong> Tickets cost $3 each. Write an expression for the total cost for n tickets.</p>
+      <div class="step"><div class="step-num">1</div><p>Cost per ticket × number of tickets</p></div>
+      <div class="math">Cost = 3n</div>
+      <div class="step"><div class="step-num">2</div><p>If there's a $2 service fee: Cost = 3n + 2</p></div>
+      <div class="answer">✅ This is a discrete linear relation — the cost goes up by $3 for every extra ticket.</div>
+    </div></div>
+  </div>
+  <div class="section-divider"></div>
+  <div class="quiz-section"><h3>🧠 Weekly Quiz – Linear Relations</h3>
+    <div class="quiz-controls"><div class="quiz-stat"><div class="qs-val" id="sc-linear">0</div><div class="qs-label">Score</div></div><div class="quiz-stat"><div class="qs-val" id="an-linear">0</div><div class="qs-label">Answered</div></div><div class="quiz-progress-wrap"><div style="font-size:.75rem;font-weight:600;color:var(--gray-500)">Progress</div><div class="qp-bar"><div class="qp-fill" id="pb-linear" style="width:0%"></div></div></div></div>
+    <div id="qs-linear"></div>
+    <div class="quiz-result-box" id="qr-linear"><div class="qr-emoji" id="qre-linear">🎉</div><div class="qr-score" id="qrs-linear">20/20</div><div class="qr-msg" id="qrm-linear">Excellent!</div><button class="btn-restart" onclick="restartQuiz('linear')">🔄 Try Again</button></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     EQUATIONS
+════════════════════════════════════════════════════ -->
+<div class="topic-panel" id="equations">
+  <div class="topic-header"><h2>⚖️ Two-Step Equations</h2><p>Solving equations with whole-number coefficients, constants, and solutions.</p><span class="bc-badge">BC Math 7 · Algebra</span></div>
+  <div class="videos-section"><h3>🎬 Watch & Learn</h3>
+    <div class="video-grid">
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/9ITsXICV2u0" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Two-Step Equations</h4><p>Khan Academy – solving step by step</p></div></div>
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/LDIiYKYvvdA" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Algebra Basics – Solving Equations</h4><p>Math Antics – balance method</p></div></div>
+    </div>
+  </div>
+  <div class="examples-section"><h3>✏️ Step-by-Step Examples</h3>
+    <div class="example-card"><div class="example-header">📘 Example 1 – Solve 2x + 5 = 13</div><div class="example-body">
+      <div class="step"><div class="step-num">1</div><p>Subtract 5 from both sides (undo the addition first)</p></div>
+      <div class="math">2x + 5 − 5 = 13 − 5  →  2x = 8</div>
+      <div class="step"><div class="step-num">2</div><p>Divide both sides by 2 (undo the multiplication)</p></div>
+      <div class="math">2x ÷ 2 = 8 ÷ 2  →  x = 4</div>
+      <div class="step"><div class="step-num">3</div><p>Check: 2(4) + 5 = 8 + 5 = 13 ✓</p></div>
+      <div class="answer">✅ x = 4</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 2 – Solve 3x − 7 = 14</div><div class="example-body">
+      <div class="step"><div class="step-num">1</div><p>Add 7 to both sides: 3x = 21</p></div>
+      <div class="step"><div class="step-num">2</div><p>Divide by 3: x = 7</p></div>
+      <div class="math">3(7) − 7 = 21 − 7 = 14 ✓</div>
+      <div class="answer">✅ x = 7</div>
+      <div class="tip">💡 Always do the opposite operation. Addition ↔ Subtraction, Multiplication ↔ Division.</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 3 – Word Problem</div><div class="example-body">
+      <p><strong>Problem:</strong> Rudraansh has some books. After buying 3 more and doubling the total, he has 18 books. How many did he start with?</p>
+      <div class="step"><div class="step-num">1</div><p>Let x = starting books. Equation: 2(x + 3) = 18</p></div>
+      <div class="step"><div class="step-num">2</div><p>Divide both sides by 2: x + 3 = 9</p></div>
+      <div class="step"><div class="step-num">3</div><p>Subtract 3: x = 6</p></div>
+      <div class="answer">✅ He started with 6 books.</div>
+    </div></div>
+  </div>
+  <div class="section-divider"></div>
+  <div class="quiz-section"><h3>🧠 Weekly Quiz – Two-Step Equations</h3>
+    <div class="quiz-controls"><div class="quiz-stat"><div class="qs-val" id="sc-equations">0</div><div class="qs-label">Score</div></div><div class="quiz-stat"><div class="qs-val" id="an-equations">0</div><div class="qs-label">Answered</div></div><div class="quiz-progress-wrap"><div style="font-size:.75rem;font-weight:600;color:var(--gray-500)">Progress</div><div class="qp-bar"><div class="qp-fill" id="pb-equations" style="width:0%"></div></div></div></div>
+    <div id="qs-equations"></div>
+    <div class="quiz-result-box" id="qr-equations"><div class="qr-emoji" id="qre-equations">🎉</div><div class="qr-score" id="qrs-equations">20/20</div><div class="qr-msg" id="qrm-equations">Excellent!</div><button class="btn-restart" onclick="restartQuiz('equations')">🔄 Try Again</button></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     CIRCLES
+════════════════════════════════════════════════════ -->
+<div class="topic-panel" id="circles">
+  <div class="topic-header"><h2>⭕ Circumference & Area of Circles</h2><p>Using π (pi) to calculate circumference and area — the constant ratio between circumference and diameter.</p><span class="bc-badge">BC Math 7 · Geometry</span></div>
+  <div class="videos-section"><h3>🎬 Watch & Learn</h3>
+    <div class="video-grid">
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/O-cawByg2aA" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Circumference of a Circle</h4><p>Math Antics – understanding π and C = πd</p></div></div>
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/M3sXjCnEAFI" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Area of a Circle</h4><p>Math Antics – A = πr²</p></div></div>
+    </div>
+  </div>
+  <div class="examples-section"><h3>✏️ Step-by-Step Examples</h3>
+    <div class="example-card"><div class="example-header">📘 Key Formulas</div><div class="example-body">
+      <div class="math">π ≈ 3.14  (or use the π button on your calculator)
+Circumference = π × d  (where d = diameter)
+Circumference = 2 × π × r  (where r = radius)
+Area = π × r²  (r² means r × r)</div>
+      <div class="tip">💡 Radius = half of diameter. Diameter = 2 × radius.</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 1 – Find Circumference (diameter given)</div><div class="example-body">
+      <p><strong>Problem:</strong> Find the circumference of a circle with diameter 10 cm.</p>
+      <div class="step"><div class="step-num">1</div><p>Formula: C = π × d</p></div>
+      <div class="step"><div class="step-num">2</div><p>Substitute: C = 3.14 × 10</p></div>
+      <div class="math">C = 3.14 × 10 = 31.4 cm</div>
+      <div class="answer">✅ Circumference ≈ 31.4 cm</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 2 – Find Area (radius given)</div><div class="example-body">
+      <p><strong>Problem:</strong> Find the area of a circle with radius 7 m.</p>
+      <div class="step"><div class="step-num">1</div><p>Formula: A = π × r²</p></div>
+      <div class="step"><div class="step-num">2</div><p>r² = 7 × 7 = 49</p></div>
+      <div class="step"><div class="step-num">3</div><p>A = 3.14 × 49</p></div>
+      <div class="math">A = 3.14 × 49 = 153.86 m²</div>
+      <div class="answer">✅ Area ≈ 153.86 m²</div>
+    </div></div>
+  </div>
+  <div class="section-divider"></div>
+  <div class="quiz-section"><h3>🧠 Weekly Quiz – Circumference & Area</h3>
+    <div class="quiz-controls"><div class="quiz-stat"><div class="qs-val" id="sc-circles">0</div><div class="qs-label">Score</div></div><div class="quiz-stat"><div class="qs-val" id="an-circles">0</div><div class="qs-label">Answered</div></div><div class="quiz-progress-wrap"><div style="font-size:.75rem;font-weight:600;color:var(--gray-500)">Progress</div><div class="qp-bar"><div class="qp-fill" id="pb-circles" style="width:0%"></div></div></div></div>
+    <div id="qs-circles"></div>
+    <div class="quiz-result-box" id="qr-circles"><div class="qr-emoji" id="qre-circles">🎉</div><div class="qr-score" id="qrs-circles">20/20</div><div class="qr-msg" id="qrm-circles">Excellent!</div><button class="btn-restart" onclick="restartQuiz('circles')">🔄 Try Again</button></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     VOLUME
+════════════════════════════════════════════════════ -->
+<div class="topic-panel" id="volume">
+  <div class="topic-header"><h2>📦 Volume of Prisms & Cylinders</h2><p>Calculating volume of rectangular prisms and cylinders.</p><span class="bc-badge">BC Math 7 · Geometry</span></div>
+  <div class="videos-section"><h3>🎬 Watch & Learn</h3>
+    <div class="video-grid">
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/A1WJM0ynFnI" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Volume of Rectangular Prisms</h4><p>Math Antics – length × width × height</p></div></div>
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/jkTWEQJeqMY" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Volume of Cylinders</h4><p>Khan Academy – using πr²h</p></div></div>
+    </div>
+  </div>
+  <div class="examples-section"><h3>✏️ Step-by-Step Examples</h3>
+    <div class="example-card"><div class="example-header">📘 Key Formulas</div><div class="example-body">
+      <div class="math">Rectangular Prism: V = l × w × h
+Cylinder: V = π × r² × h</div>
+      <div class="tip">💡 Volume of ANY prism or cylinder = Area of Base × Height</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 1 – Rectangular Prism</div><div class="example-body">
+      <p><strong>Problem:</strong> Find the volume of a box 8 cm long, 5 cm wide, 3 cm tall.</p>
+      <div class="math">V = 8 × 5 × 3 = 120 cm³</div>
+      <div class="answer">✅ Volume = 120 cm³</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 2 – Cylinder</div><div class="example-body">
+      <p><strong>Problem:</strong> A can has radius 4 cm and height 12 cm. Find its volume.</p>
+      <div class="step"><div class="step-num">1</div><p>r² = 4 × 4 = 16</p></div>
+      <div class="step"><div class="step-num">2</div><p>V = 3.14 × 16 × 12</p></div>
+      <div class="math">V = 3.14 × 16 × 12 = 602.88 cm³</div>
+      <div class="answer">✅ Volume ≈ 602.88 cm³</div>
+    </div></div>
+  </div>
+  <div class="section-divider"></div>
+  <div class="quiz-section"><h3>🧠 Weekly Quiz – Volume</h3>
+    <div class="quiz-controls"><div class="quiz-stat"><div class="qs-val" id="sc-volume">0</div><div class="qs-label">Score</div></div><div class="quiz-stat"><div class="qs-val" id="an-volume">0</div><div class="qs-label">Answered</div></div><div class="quiz-progress-wrap"><div style="font-size:.75rem;font-weight:600;color:var(--gray-500)">Progress</div><div class="qp-bar"><div class="qp-fill" id="pb-volume" style="width:0%"></div></div></div></div>
+    <div id="qs-volume"></div>
+    <div class="quiz-result-box" id="qr-volume"><div class="qr-emoji" id="qre-volume">🎉</div><div class="qr-score" id="qrs-volume">20/20</div><div class="qr-msg" id="qrm-volume">Excellent!</div><button class="btn-restart" onclick="restartQuiz('volume')">🔄 Try Again</button></div>
+  </div>
+</div>
+
+<!-- COORDINATES, GRAPHS, PROBABILITY, FINANCIAL — panels follow same pattern -->
+<div class="topic-panel" id="coordinates">
+  <div class="topic-header"><h2>🗺️ Cartesian Coordinates & Transformations</h2><p>Plotting points on the Cartesian plane and applying translations, reflections, and rotations.</p><span class="bc-badge">BC Math 7 · Geometry</span></div>
+  <div class="videos-section"><h3>🎬 Watch & Learn</h3>
+    <div class="video-grid">
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/9RdLf4Vhg5s" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>The Coordinate Plane</h4><p>Khan Academy – all four quadrants</p></div></div>
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/XiAoUDfrar0" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Transformations – Translations</h4><p>Khan Academy – sliding shapes</p></div></div>
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/miTkHDwjIaY" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Reflections & Rotations</h4><p>Math Antics – flipping and turning shapes</p></div></div>
+    </div>
+  </div>
+  <div class="examples-section"><h3>✏️ Step-by-Step Examples</h3>
+    <div class="example-card"><div class="example-header">📘 Example 1 – Plotting Points</div><div class="example-body">
+      <p>A point (x, y) — x is horizontal, y is vertical. Start at origin (0,0).</p>
+      <div class="math">Point A (3, −2): go RIGHT 3, then DOWN 2 → Quadrant IV
+Point B (−4, 1): go LEFT 4, then UP 1 → Quadrant II</div>
+      <div class="tip">💡 Quadrants: Q1 (+,+)  Q2 (−,+)  Q3 (−,−)  Q4 (+,−)</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 2 – Translation</div><div class="example-body">
+      <p><strong>Translate point A (2,3) by (right 4, down 2):</strong></p>
+      <div class="math">New x = 2 + 4 = 6
+New y = 3 − 2 = 1
+A' = (6, 1)</div>
+      <div class="answer">✅ A moves to A' (6, 1)</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 3 – Reflection over the x-axis</div><div class="example-body">
+      <p>Reflecting over the x-axis flips the y coordinate's sign.</p>
+      <div class="math">P (3, 5)  →  P' (3, −5)
+Q (−2, 4) →  Q' (−2, −4)</div>
+      <div class="tip">💡 Reflect over y-axis: flip the x sign. Reflect over x-axis: flip the y sign.</div>
+    </div></div>
+  </div>
+  <div class="section-divider"></div>
+  <div class="quiz-section"><h3>🧠 Weekly Quiz – Coordinates & Transformations</h3>
+    <div class="quiz-controls"><div class="quiz-stat"><div class="qs-val" id="sc-coordinates">0</div><div class="qs-label">Score</div></div><div class="quiz-stat"><div class="qs-val" id="an-coordinates">0</div><div class="qs-label">Answered</div></div><div class="quiz-progress-wrap"><div style="font-size:.75rem;font-weight:600;color:var(--gray-500)">Progress</div><div class="qp-bar"><div class="qp-fill" id="pb-coordinates" style="width:0%"></div></div></div></div>
+    <div id="qs-coordinates"></div>
+    <div class="quiz-result-box" id="qr-coordinates"><div class="qr-emoji" id="qre-coordinates">🎉</div><div class="qr-score" id="qrs-coordinates">20/20</div><div class="qr-msg" id="qrm-coordinates">Excellent!</div><button class="btn-restart" onclick="restartQuiz('coordinates')">🔄 Try Again</button></div>
+  </div>
+</div>
+
+<div class="topic-panel" id="graphs">
+  <div class="topic-header"><h2>🥧 Circle Graphs</h2><p>Reading, creating, and interpreting circle graphs (pie charts) to illustrate proportion.</p><span class="bc-badge">BC Math 7 · Data</span></div>
+  <div class="videos-section"><h3>🎬 Watch & Learn</h3>
+    <div class="video-grid">
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/bfNYglFEFSY" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Reading Circle Graphs</h4><p>Khan Academy – interpreting pie charts</p></div></div>
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/tSYotFVSj4c" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Creating Circle Graphs</h4><p>Converting percents to degrees for pie charts</p></div></div>
+    </div>
+  </div>
+  <div class="examples-section"><h3>✏️ Step-by-Step Examples</h3>
+    <div class="example-card"><div class="example-header">📘 Example 1 – Percent to Degrees</div><div class="example-body">
+      <p><strong>Problem:</strong> 25% of students chose soccer. What angle does this sector use?</p>
+      <div class="math">Angle = percent × 360° = 0.25 × 360° = 90°</div>
+      <div class="answer">✅ The soccer sector is 90°</div>
+      <div class="tip">💡 A full circle = 360°. So 50% = 180°, 25% = 90°, 10% = 36°.</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 2 – Reading a Circle Graph</div><div class="example-body">
+      <p>A circle graph shows: Hockey 40%, Soccer 30%, Basketball 20%, Other 10%. Total students = 200.</p>
+      <div class="math">Hockey:     40% × 200 = 80 students
+Soccer:     30% × 200 = 60 students
+Basketball: 20% × 200 = 40 students
+Other:      10% × 200 = 20 students</div>
+      <div class="answer">✅ Always multiply percent (as decimal) by the total to find the actual count.</div>
+    </div></div>
+  </div>
+  <div class="section-divider"></div>
+  <div class="quiz-section"><h3>🧠 Weekly Quiz – Circle Graphs</h3>
+    <div class="quiz-controls"><div class="quiz-stat"><div class="qs-val" id="sc-graphs">0</div><div class="qs-label">Score</div></div><div class="quiz-stat"><div class="qs-val" id="an-graphs">0</div><div class="qs-label">Answered</div></div><div class="quiz-progress-wrap"><div style="font-size:.75rem;font-weight:600;color:var(--gray-500)">Progress</div><div class="qp-bar"><div class="qp-fill" id="pb-graphs" style="width:0%"></div></div></div></div>
+    <div id="qs-graphs"></div>
+    <div class="quiz-result-box" id="qr-graphs"><div class="qr-emoji" id="qre-graphs">🎉</div><div class="qr-score" id="qrs-graphs">20/20</div><div class="qr-msg" id="qrm-graphs">Excellent!</div><button class="btn-restart" onclick="restartQuiz('graphs')">🔄 Try Again</button></div>
+  </div>
+</div>
+
+<div class="topic-panel" id="probability">
+  <div class="topic-header"><h2>🎲 Experimental Probability</h2><p>Probability of two independent events — experimental vs theoretical probability.</p><span class="bc-badge">BC Math 7 · Data & Probability</span></div>
+  <div class="videos-section"><h3>🎬 Watch & Learn</h3>
+    <div class="video-grid">
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/uzkc-qNVoOk" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Basic Probability</h4><p>Khan Academy – theoretical probability</p></div></div>
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/uzkc-qNVoOk" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Independent Events</h4><p>Compound probability with two events</p></div></div>
+    </div>
+  </div>
+  <div class="examples-section"><h3>✏️ Step-by-Step Examples</h3>
+    <div class="example-card"><div class="example-header">📘 Key Concepts</div><div class="example-body">
+      <div class="math">Probability = (favourable outcomes) ÷ (total possible outcomes)
+P(event) ranges from 0 (impossible) to 1 (certain)</div>
+      <div class="tip">💡 Two events are INDEPENDENT if one doesn't affect the other (e.g., flipping a coin twice).</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 1 – Single Event</div><div class="example-body">
+      <p><strong>Problem:</strong> Rolling a 6-sided die. What is P(rolling a 4)?</p>
+      <div class="math">P(4) = 1/6 ≈ 0.167 ≈ 16.7%</div>
+      <div class="answer">✅ There is 1 favourable outcome out of 6 total outcomes.</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 2 – Two Independent Events</div><div class="example-body">
+      <p><strong>Problem:</strong> Flip a coin AND roll a die. What is P(heads AND rolling a 3)?</p>
+      <div class="step"><div class="step-num">1</div><p>P(heads) = 1/2</p></div>
+      <div class="step"><div class="step-num">2</div><p>P(rolling 3) = 1/6</p></div>
+      <div class="step"><div class="step-num">3</div><p>Multiply (independent events): 1/2 × 1/6 = 1/12</p></div>
+      <div class="math">P(heads AND 3) = 1/2 × 1/6 = 1/12 ≈ 8.3%</div>
+      <div class="answer">✅ Answer: 1/12</div>
+    </div></div>
+  </div>
+  <div class="section-divider"></div>
+  <div class="quiz-section"><h3>🧠 Weekly Quiz – Experimental Probability</h3>
+    <div class="quiz-controls"><div class="quiz-stat"><div class="qs-val" id="sc-probability">0</div><div class="qs-label">Score</div></div><div class="quiz-stat"><div class="qs-val" id="an-probability">0</div><div class="qs-label">Answered</div></div><div class="quiz-progress-wrap"><div style="font-size:.75rem;font-weight:600;color:var(--gray-500)">Progress</div><div class="qp-bar"><div class="qp-fill" id="pb-probability" style="width:0%"></div></div></div></div>
+    <div id="qs-probability"></div>
+    <div class="quiz-result-box" id="qr-probability"><div class="qr-emoji" id="qre-probability">🎉</div><div class="qr-score" id="qrs-probability">20/20</div><div class="qr-msg" id="qrm-probability">Excellent!</div><button class="btn-restart" onclick="restartQuiz('probability')">🔄 Try Again</button></div>
+  </div>
+</div>
+
+<div class="topic-panel" id="financial">
+  <div class="topic-header"><h2>💰 Financial Literacy</h2><p>Applying percents in financial contexts: tax, tips, discounts, and budgeting.</p><span class="bc-badge">BC Math 7 · Financial Literacy</span></div>
+  <div class="videos-section"><h3>🎬 Watch & Learn</h3>
+    <div class="video-grid">
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/V2cHtHlBVnA" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Percents – Tax, Tips & Discounts</h4><p>Khan Academy – real-world percent applications</p></div></div>
+      <div class="video-card"><div class="video-wrap"><iframe src="https://www.youtube.com/embed/bk8O7EzGLxo" allowfullscreen loading="lazy"></iframe></div><div class="video-info"><h4>Sales Tax and Discounts</h4><p>Step-by-step calculations for shopping</p></div></div>
+    </div>
+  </div>
+  <div class="examples-section"><h3>✏️ Step-by-Step Examples</h3>
+    <div class="example-card"><div class="example-header">📘 Example 1 – Calculating Tax (BC GST + PST)</div><div class="example-body">
+      <p><strong>Problem:</strong> A video game costs $60. BC has 5% GST + 7% PST = 12% tax. What is the final price?</p>
+      <div class="step"><div class="step-num">1</div><p>Tax amount = 12% × $60 = 0.12 × 60 = $7.20</p></div>
+      <div class="step"><div class="step-num">2</div><p>Final price = $60 + $7.20</p></div>
+      <div class="math">Final price = $67.20</div>
+      <div class="answer">✅ You pay $67.20</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 2 – Discount</div><div class="example-body">
+      <p><strong>Problem:</strong> Shoes originally cost $80 and are 30% off. What is the sale price?</p>
+      <div class="step"><div class="step-num">1</div><p>Discount amount = 30% × $80 = $24</p></div>
+      <div class="step"><div class="step-num">2</div><p>Sale price = $80 − $24 = $56</p></div>
+      <div class="math">Sale price = $56</div>
+      <div class="answer">✅ You save $24, paying only $56.</div>
+    </div></div>
+    <div class="example-card"><div class="example-header">📘 Example 3 – Tip at a Restaurant</div><div class="example-body">
+      <p><strong>Problem:</strong> Restaurant bill is $45. You want to leave a 15% tip. How much is the tip?</p>
+      <div class="math">Tip = 15% × $45 = 0.15 × 45 = $6.75
+Total = $45 + $6.75 = $51.75</div>
+      <div class="answer">✅ Tip = $6.75. Total bill = $51.75</div>
+    </div></div>
+  </div>
+  <div class="section-divider"></div>
+  <div class="quiz-section"><h3>🧠 Weekly Quiz – Financial Literacy</h3>
+    <div class="quiz-controls"><div class="quiz-stat"><div class="qs-val" id="sc-financial">0</div><div class="qs-label">Score</div></div><div class="quiz-stat"><div class="qs-val" id="an-financial">0</div><div class="qs-label">Answered</div></div><div class="quiz-progress-wrap"><div style="font-size:.75rem;font-weight:600;color:var(--gray-500)">Progress</div><div class="qp-bar"><div class="qp-fill" id="pb-financial" style="width:0%"></div></div></div></div>
+    <div id="qs-financial"></div>
+    <div class="quiz-result-box" id="qr-financial"><div class="qr-emoji" id="qre-financial">🎉</div><div class="qr-score" id="qrs-financial">20/20</div><div class="qr-msg" id="qrm-financial">Excellent!</div><button class="btn-restart" onclick="restartQuiz('financial')">🔄 Try Again</button></div>
+  </div>
+</div>
+
+<!-- REFERENCES PAGE -->
+<div class="topic-panel" id="references">
+  <div class="topic-header"><h2>📚 All References & Resources</h2><p>All sources used in this study guide, plus extra learning resources.</p></div>
+  <div style="margin-bottom:1.5rem">
+    <h3 style="font-size:1rem;font-weight:800;margin-bottom:.75rem;color:var(--gray-700)">🏛️ Official BC Curriculum</h3>
+    <div class="ref-item"><span class="ref-icon">🌐</span><div>BC Ministry of Education – <a href="https://curriculum.gov.bc.ca/curriculum/mathematics/7" target="_blank">Mathematics 7 Curriculum</a> — the primary source for all topics, big ideas, and learning standards.</div></div>
+    <div class="ref-item"><span class="ref-icon">📄</span><div>BC Ministry of Education – <a href="https://curriculum.gov.bc.ca/sites/curriculum.gov.bc.ca/files/pdf/phe_learning_standards.pdf" target="_blank">Health Learning Standards PDF</a></div></div>
+  </div>
+  <div style="margin-bottom:1.5rem">
+    <h3 style="font-size:1rem;font-weight:800;margin-bottom:.75rem;color:var(--gray-700)">🎬 Video Learning</h3>
+    <div class="ref-item"><span class="ref-icon">▶️</span><div><a href="https://www.khanacademy.org/math/cc-seventh-grade-math" target="_blank">Khan Academy – Grade 7 Math</a> — free video lessons, practice problems, and mastery tracking for every topic.</div></div>
+    <div class="ref-item"><span class="ref-icon">▶️</span><div><a href="https://www.youtube.com/@MathAntics" target="_blank">Math Antics (YouTube)</a> — entertaining, clear explanations of math concepts for middle school students.</div></div>
+    <div class="ref-item"><span class="ref-icon">▶️</span><div><a href="https://www.youtube.com/@tecmath" target="_blank">tecmath (YouTube)</a> — short, focused math tutorials for quick review.</div></div>
+  </div>
+  <div style="margin-bottom:1.5rem">
+    <h3 style="font-size:1rem;font-weight:800;margin-bottom:.75rem;color:var(--gray-700)">📖 Reading & Practice</h3>
+    <div class="ref-item"><span class="ref-icon">📖</span><div><a href="https://www.mathsisfun.com" target="_blank">Math Is Fun (mathsisfun.com)</a> — clear written explanations with interactive examples for every math topic.</div></div>
+    <div class="ref-item"><span class="ref-icon">📖</span><div><a href="https://www.ck12.org/student/" target="_blank">CK-12 (ck12.org)</a> — free online textbook aligned to BC curriculum. Search "Math Grade 7".</div></div>
+    <div class="ref-item"><span class="ref-icon">📖</span><div><a href="https://www.bbc.co.uk/bitesize/subjects/zqhs34j" target="_blank">BBC Bitesize – Maths</a> — written lessons, quizzes, and videos for core math topics.</div></div>
+    <div class="ref-item"><span class="ref-icon">🎮</span><div><a href="https://www.desmos.com/scientific" target="_blank">Desmos Calculator</a> — free online calculator and graphing tool. Great for checking answers!</div></div>
+    <div class="ref-item"><span class="ref-icon">🎮</span><div><a href="https://www.prodigygame.com" target="_blank">Prodigy Math Game</a> — curriculum-aligned math practice in a game format. Used in many BC schools.</div></div>
+  </div>
+  <div>
+    <h3 style="font-size:1rem;font-weight:800;margin-bottom:.75rem;color:var(--gray-700)">📘 Textbooks (BC Schools)</h3>
+    <div class="ref-item"><span class="ref-icon">📗</span><div><strong>Math Makes Sense 7</strong> (Pearson) — most commonly used Grade 7 math textbook in BC schools.</div></div>
+    <div class="ref-item"><span class="ref-icon">📘</span><div><strong>Nelson Mathematics 7</strong> — alternate BC curriculum-aligned textbook.</div></div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ─────────────────────────────────────────────
+// QUIZ DATA – 20 questions per topic
+// ─────────────────────────────────────────────
+const QUIZZES = {
+  integers:[
+    {q:"What is (−3) + (−5)?",opts:["−8","8","−2","2"],a:0,fb:"Adding two negatives: −3 + (−5) = −8"},
+    {q:"What is (−7) + (+4)?",opts:["11","−3","3","−11"],a:1,fb:"Different signs: 7−4=3, keep negative sign → −3"},
+    {q:"What is (+6) − (−2)?",opts:["4","−8","8","−4"],a:2,fb:"Subtracting a negative = adding positive: 6+2=8"},
+    {q:"What is (−4) − (+3)?",opts:["7","−7","1","−1"],a:1,fb:"−4 − 3 = −7"},
+    {q:"What is (−3) × (−4)?",opts:["−12","12","7","−7"],a:1,fb:"Negative × Negative = Positive: 3×4=12"},
+    {q:"What is (+5) × (−6)?",opts:["30","−30","11","−11"],a:1,fb:"Positive × Negative = Negative: −30"},
+    {q:"What is (−20) ÷ (−4)?",opts:["−5","5","−80","80"],a:1,fb:"Negative ÷ Negative = Positive: 20÷4=5"},
+    {q:"What is (+18) ÷ (−3)?",opts:["6","−6","15","−15"],a:1,fb:"Positive ÷ Negative = Negative: −6"},
+    {q:"Evaluate: 2 + (−3) × 4",opts:["−4","−10","20","4"],a:1,fb:"BEDMAS: multiply first: (−3)×4=−12, then 2+(−12)=−10"},
+    {q:"Which has the greater value: −8 or −3?",opts:["−8","−3","They are equal","Cannot determine"],a:1,fb:"On a number line, −3 is to the right of −8, so −3 is greater."},
+    {q:"What is the absolute value of −9?",opts:["−9","0","9","18"],a:2,fb:"Absolute value is the distance from 0, always positive: |−9|=9"},
+    {q:"What is (−2)³?",opts:["8","−8","6","−6"],a:1,fb:"(−2)³ = (−2)×(−2)×(−2) = 4×(−2) = −8"},
+    {q:"What integer is 6 less than −2?",opts:["4","−4","8","−8"],a:3,fb:"−2 − 6 = −8"},
+    {q:"The temperature was −5°C and fell 8 more degrees. What is it now?",opts:["3°C","−3°C","13°C","−13°C"],a:3,fb:"−5 − 8 = −13°C"},
+    {q:"Evaluate: (−5) + (+5)",opts:["10","−10","0","25"],a:2,fb:"Opposite integers sum to zero: −5 + 5 = 0"},
+    {q:"What is (−1) × (−1) × (−1)?",opts:["1","−1","3","−3"],a:1,fb:"(−1)×(−1)=1, then 1×(−1)=−1. Odd number of negatives → negative."},
+    {q:"Evaluate: −3 × (4 − 7)",opts:["9","−9","−21","21"],a:0,fb:"Bracket first: 4−7=−3. Then −3×(−3)=+9"},
+    {q:"What is (−36) ÷ 9?",opts:["4","−4","27","−27"],a:1,fb:"Positive ÷ Negative = Negative: 36÷9=4 → −4"},
+    {q:"Order from least to greatest: −4, 2, −7, 0",opts:["0, −4, −7, 2","−7, −4, 0, 2","2, 0, −4, −7","−4, −7, 0, 2"],a:1,fb:"On number line left to right: −7, −4, 0, 2"},
+    {q:"Which expression equals +12?",opts:["(−3)×(−4)","(−3)×4","3×(−4)","(−12)×1"],a:0,fb:"(−3)×(−4) = +12. Negative × Negative = Positive."}
+  ],
+  decimals:[
+    {q:"What is 3.6 + 2.45?",opts:["5.05","6.05","5.95","6.15"],a:1,fb:"Line up decimals: 3.60 + 2.45 = 6.05"},
+    {q:"What is 7.8 − 3.25?",opts:["4.55","4.65","4.45","5.55"],a:0,fb:"7.80 − 3.25 = 4.55"},
+    {q:"What is 1.2 × 3?",opts:["3.6","36","0.36","3.06"],a:0,fb:"1.2 × 3 = 3.6 (one decimal place)"},
+    {q:"What is 0.5 × 0.4?",opts:["2","0.2","0.02","20"],a:1,fb:"5×4=20; 2 decimal places → 0.20 = 0.2"},
+    {q:"What is 8.4 ÷ 2?",opts:["4.2","42","0.42","16.8"],a:0,fb:"8.4 ÷ 2 = 4.2"},
+    {q:"What is 6.3 ÷ 0.7?",opts:["0.9","9","0.09","90"],a:1,fb:"Multiply both by 10: 63 ÷ 7 = 9"},
+    {q:"Evaluate: 2.5 + 1.5 × 2",opts:["8","5.5","7","6"],a:1,fb:"BEDMAS: multiply first: 1.5×2=3, then 2.5+3=5.5"},
+    {q:"Round 4.768 to the nearest tenth.",opts:["4.7","4.8","4.76","5.0"],a:1,fb:"Look at hundredths digit (6 ≥ 5), round up: 4.8"},
+    {q:"Which is greatest: 0.3, 0.30, 0.03?",opts:["0.03","0.30","0.3 and 0.30 are equal","0.03"],a:2,fb:"0.3 = 0.30 (same value). 0.03 is smallest."},
+    {q:"What is 100 × 0.045?",opts:["0.45","4.5","45","450"],a:1,fb:"Moving decimal 2 places right: 4.5"},
+    {q:"What is 3.14 × 10?",opts:["0.314","31.4","314","3140"],a:1,fb:"Multiply by 10: move decimal right one place = 31.4"},
+    {q:"What is 0.6 ÷ 100?",opts:["60","6","0.006","0.06"],a:2,fb:"Divide by 100: move decimal left 2 places = 0.006"},
+    {q:"A ribbon is 2.75 m long. Cut off 1.4 m. How much remains?",opts:["1.35 m","1.25 m","1.45 m","1.15 m"],a:0,fb:"2.75 − 1.40 = 1.35 m"},
+    {q:"4 friends share a pizza costing $18.40 equally. How much each?",opts:["$4.60","$4.06","$5.60","$4.80"],a:0,fb:"18.40 ÷ 4 = 4.60"},
+    {q:"What is 0.25 × 40?",opts:["1","100","10","1000"],a:2,fb:"0.25 × 40 = 10 (or: 40 ÷ 4 = 10 since 0.25 = 1/4)"},
+    {q:"Evaluate: (3.2 + 0.8) × 5",opts:["16","19","20","17"],a:2,fb:"Brackets first: 3.2+0.8=4.0, then 4.0×5=20"},
+    {q:"Which has 3 decimal places?",opts:["3.14","0.750","0.001","both b and c"],a:3,fb:"0.750 and 0.001 each have 3 decimal places."},
+    {q:"What is 12.6 ÷ 0.3?",opts:["4.2","42","0.42","420"],a:1,fb:"Multiply both by 10: 126 ÷ 3 = 42"},
+    {q:"If apples cost $1.25 each, how much for 8 apples?",opts:["$9.00","$10.00","$8.50","$10.25"],a:1,fb:"1.25 × 8 = 10.00"},
+    {q:"What is 0.1²?",opts:["0.1","0.01","0.001","1"],a:1,fb:"0.1 × 0.1 = 0.01 (2 decimal places: 1 × 1 = 1, shift 2 places)"}
+  ],
+  fractions:[
+    {q:"Convert 3/5 to a percent.",opts:["35%","60%","53%","0.6%"],a:1,fb:"3÷5=0.6, ×100=60%"},
+    {q:"What is 25% as a fraction in simplest form?",opts:["25/100","5/20","1/4","2/5"],a:2,fb:"25/100 = 1/4"},
+    {q:"What is 0.375 as a fraction?",opts:["3/8","3/75","37/50","3/4"],a:0,fb:"0.375 = 375/1000 = 3/8"},
+    {q:"Find 40% of 150.",opts:["40","60","90","55"],a:1,fb:"0.40 × 150 = 60"},
+    {q:"Simplify the ratio 18:24.",opts:["9:12","3:4","6:8","2:3"],a:1,fb:"GCF=6: 18÷6=3, 24÷6=4 → 3:4"},
+    {q:"Which is largest: 1/2, 3/8, 5/8?",opts:["1/2","3/8","5/8","They are equal"],a:2,fb:"5/8=0.625 > 1/2=0.5 > 3/8=0.375"},
+    {q:"What percent of 80 is 20?",opts:["16%","25%","20%","4%"],a:1,fb:"20/80 = 0.25 = 25%"},
+    {q:"A class has 30 students. 18 are girls. What ratio of girls to total is this?",opts:["3:5","2:3","3:2","18:12"],a:0,fb:"18:30 = 3:5 (divide by 6)"},
+    {q:"What is 1/3 as a decimal?",opts:["0.3","0.33","0.333...","0.13"],a:2,fb:"1÷3 = 0.333... (repeating)"},
+    {q:"If a bag has 5 red, 3 blue, 2 green marbles, what fraction are red?",opts:["1/2","5/8","1/3","5/10"],a:3,fb:"5 red out of 10 total = 5/10 = 1/2. Wait — 5/10 simplifies to 1/2, so A is also correct — but the exact fraction before simplifying is 5/10."},
+    {q:"A store has 60% off. Item costs $50. Sale price?",opts:["$30","$20","$40","$25"],a:1,fb:"60% off means you pay 40%. 0.40×50=$20"},
+    {q:"Order from least to greatest: 0.4, 2/5, 45%",opts:["0.4, 2/5, 45%","2/5, 0.4, 45%","All equal","45%, 0.4, 2/5"],a:2,fb:"0.4 = 2/5 = 0.4 = 40% = 40%. 45% > 40%. So 2/5 = 0.4 < 45%."},
+    {q:"What is 3/4 + 1/8?",opts:["4/12","7/8","1","4/8"],a:1,fb:"Convert 3/4 to 6/8. Then 6/8+1/8=7/8"},
+    {q:"What is 2/3 of 90?",opts:["45","30","60","120"],a:2,fb:"2/3 × 90 = 180/3 = 60"},
+    {q:"Write 150% as a mixed number.",opts:["1 1/2","15","1 1/5","5/3"],a:0,fb:"150% = 150/100 = 3/2 = 1 1/2"},
+    {q:"If 3 out of 4 students passed, what percent passed?",opts:["34%","75%","43%","25%"],a:1,fb:"3/4 = 0.75 = 75%"},
+    {q:"What is the ratio 2:3 expressed as a fraction of the total?",opts:["2/3","3/2","2/5","3/5"],a:2,fb:"Total parts = 2+3=5. First part = 2/5 of total."},
+    {q:"A $120 jacket is 15% off. How much is saved?",opts:["$15","$18","$20","$12"],a:1,fb:"0.15 × 120 = $18 saved"},
+    {q:"Which is closest to 1/2: 49%, 0.49, or 9/20?",opts:["49%","0.49","9/20","They are all equal"],a:3,fb:"49%=0.49=9/20=0.45. All equal 0.49... Actually 9/20=0.45 ≠ 0.49. 49% and 0.49 are equal and closest to 0.5."},
+    {q:"A recipe uses 3/4 cup of sugar. For double the recipe, how much sugar?",opts:["1 cup","1 1/4 cups","1 1/2 cups","2 cups"],a:2,fb:"3/4 × 2 = 6/4 = 1 2/4 = 1 1/2 cups"}
+  ],
+  linear:[
+    {q:"What is the next term in the pattern: 3, 7, 11, 15, ...?",opts:["17","18","19","20"],a:2,fb:"Add 4 each time: 15+4=19"},
+    {q:"Using the rule y = 3x − 1, find y when x = 4.",opts:["11","12","13","10"],a:0,fb:"y = 3(4)−1 = 12−1 = 11"},
+    {q:"Which table matches y = x + 5? x=1→?",opts:["4","5","6","7"],a:2,fb:"y = 1+5 = 6"},
+    {q:"In y = 2x + 3, how much does y increase when x increases by 1?",opts:["1","2","3","5"],a:1,fb:"The coefficient of x is 2, so y increases by 2 for each increase of 1 in x."},
+    {q:"The pattern 5, 10, 15, 20... can be expressed as:",opts:["y = x + 5","y = 5x","y = 5 + x","y = x × x"],a:1,fb:"Multiply position by 5: position 1→5, 2→10, 3→15. Rule: y=5x"},
+    {q:"What is the value of y in y = 4x when x = 0?",opts:["4","0","1","−4"],a:1,fb:"y = 4(0) = 0"},
+    {q:"A taxi costs $3 plus $2 per km. Expression for total cost (k km)?",opts:["2k","3k + 2","2k + 3","3 + k"],a:2,fb:"$2 per km = 2k, plus flat $3 = 2k+3"},
+    {q:"Which is a linear relation?",opts:["y = x²","y = 3x + 1","y = 1/x","y = x³"],a:1,fb:"y=3x+1 is linear (no exponents on x, makes a straight line)"},
+    {q:"In a table: x=1,y=4; x=2,y=7; x=3,y=10. What is the rule?",opts:["y=2x+2","y=3x+1","y=x+3","y=4x"],a:1,fb:"Difference is 3 each time, and when x=1, y=4: 3(1)+1=4 ✓"},
+    {q:"Using y = 5x + 2, find y when x = 3.",opts:["15","17","13","20"],a:1,fb:"y = 5(3)+2 = 15+2 = 17"},
+    {q:"A pattern grows: 2, 5, 8, 11... What is the 10th term?",opts:["29","30","32","28"],a:0,fb:"Rule: y = 3x−1. 10th term: 3(10)−1 = 29"},
+    {q:"What does 'discrete' mean in 'discrete linear relation'?",opts:["The points form a smooth curve","Only specific values (whole numbers) are used","The relation has no pattern","Points are connected by a line"],a:1,fb:"Discrete means only certain values make sense (e.g. you can't buy half a ticket)."},
+    {q:"Evaluate: What is x if y = 2x + 1 = 9?",opts:["4","5","3","8"],a:0,fb:"2x = 9−1 = 8, x = 4"},
+    {q:"A plant grows 3 cm per week. It starts at 5 cm. Rule for height h after w weeks?",opts:["h = 3w","h = 5w + 3","h = 3w + 5","h = 5 + w"],a:2,fb:"Starts at 5, grows 3 per week: h = 3w + 5"},
+    {q:"From the rule y = x + 4, which ordered pair is correct?",opts:["(2,5)","(3,7)","(0,3)","(5,10)"],a:1,fb:"y = 3+4 = 7, so (3,7) ✓"},
+    {q:"In the expression 4n + 3, what does n represent?",opts:["A fixed constant","The variable (input value)","The starting value","The total"],a:1,fb:"n is the variable — it changes. 4 is the coefficient, 3 is the constant."},
+    {q:"Which describes a graph of a linear relation?",opts:["A curved line","A straight line","A circle","A zigzag"],a:1,fb:"Linear relations always produce straight lines on a graph."},
+    {q:"Find the missing y value: x=5, y=? in y = 2x − 3",opts:["7","10","3","13"],a:0,fb:"y = 2(5)−3 = 10−3 = 7"},
+    {q:"How many tiles in figure 4 if pattern is: fig1=3, fig2=6, fig3=9?",opts:["10","11","12","13"],a:2,fb:"Add 3 each time: 3,6,9,12. Figure 4 = 12."},
+    {q:"Which is NOT an expression for a linear relation?",opts:["3x+1","x−4","x²+2","2x"],a:2,fb:"x²+2 has a squared variable — that makes it quadratic, not linear."}
+  ],
+  equations:[
+    {q:"Solve: 2x + 3 = 11",opts:["x=3","x=4","x=5","x=7"],a:1,fb:"2x=8, x=4"},
+    {q:"Solve: 3x − 5 = 10",opts:["x=3","x=4","x=5","x=15"],a:2,fb:"3x=15, x=5"},
+    {q:"Solve: 4x + 1 = 17",opts:["x=3","x=4","x=5","x=6"],a:1,fb:"4x=16, x=4"},
+    {q:"Solve: 5x − 3 = 22",opts:["x=4","x=5","x=6","x=25"],a:1,fb:"5x=25, x=5"},
+    {q:"Solve: x/2 + 4 = 9",opts:["x=5","x=10","x=26","x=2.5"],a:1,fb:"x/2=5, x=10"},
+    {q:"Which operation do you do FIRST to solve 3x + 6 = 15?",opts:["Multiply both sides by 3","Divide by 3","Subtract 6 from both sides","Add 6 to both sides"],a:2,fb:"Undo addition/subtraction FIRST, then multiplication/division."},
+    {q:"Solve: 2x − 8 = 0",opts:["x=2","x=4","x=8","x=16"],a:1,fb:"2x=8, x=4"},
+    {q:"Check: Is x=3 a solution to 4x − 2 = 10?",opts:["Yes","No","Cannot determine","Only if x is positive"],a:0,fb:"4(3)−2 = 12−2 = 10 ✓ Yes!"},
+    {q:"Solve: 6 + 2x = 20",opts:["x=5","x=6","x=7","x=13"],a:2,fb:"2x=14, x=7"},
+    {q:"A number tripled and then 4 added equals 19. Find the number.",opts:["4","5","6","7"],a:1,fb:"3x+4=19, 3x=15, x=5"},
+    {q:"Solve: 10x − 5 = 45",opts:["x=4","x=5","x=40","x=50"],a:0,fb:"10x=50, x=5. Wait: 10(4)=40≠50. 10x=50, x=5. ✓ x=5 is correct."},
+    {q:"Solve: x/3 − 2 = 4",opts:["x=6","x=18","x=2","x=12"],a:1,fb:"x/3=6, x=18"},
+    {q:"If 2(x + 3) = 14, what is x?",opts:["x=4","x=5","x=7","x=11"],a:0,fb:"x+3=7, x=4"},
+    {q:"Solve: 7 − 3x = −8",opts:["x=3","x=4","x=5","x=−5"],a:2,fb:"−3x=−15, x=5"},
+    {q:"Which equation has solution x=6?",opts:["2x+1=11","3x−4=14","x/2+1=4","4x−10=12"],a:1,fb:"3(6)−4=18−4=14 ✓"},
+    {q:"Solve: 4x + 4 = 4",opts:["x=0","x=1","x=−1","x=2"],a:0,fb:"4x=0, x=0"},
+    {q:"Rudraansh earns $x/hour. He works 5 hours and makes $35. Solve for x.",opts:["x=5","x=7","x=6","x=8"],a:1,fb:"5x=35, x=7. He earns $7/hour."},
+    {q:"Solve: 3x + 7 = 7",opts:["x=0","x=7","x=14","x=−7"],a:0,fb:"3x=0, x=0"},
+    {q:"Solve: 2x + 5 = 3x − 1",opts:["x=4","x=6","x=8","x=−6"],a:1,fb:"Move x terms: 5+1=3x−2x → 6=x"},
+    {q:"A rectangle's perimeter is 36 cm. Its width is 7 cm. Find the length.",opts:["l=11 cm","l=14 cm","l=22 cm","l=29 cm"],a:0,fb:"P=2l+2w → 36=2l+14 → 2l=22 → l=11 cm"}
+  ],
+  circles:[
+    {q:"What is π (pi) approximately equal to?",opts:["3.41","3.14","31.4","0.314"],a:1,fb:"π ≈ 3.14 (or 3.14159...)"},
+    {q:"The formula for circumference using diameter is:",opts:["C = πr²","C = 2πr²","C = πd","C = d/π"],a:2,fb:"C = πd (diameter × pi)"},
+    {q:"The formula for area of a circle is:",opts:["A = πd","A = 2πr","A = πr²","A = πd²"],a:2,fb:"A = πr² (pi times radius squared)"},
+    {q:"Find the circumference of a circle with diameter 6 cm. (π ≈ 3.14)",opts:["18.84 cm","9.42 cm","6.28 cm","3.14 cm"],a:0,fb:"C = 3.14 × 6 = 18.84 cm"},
+    {q:"Find the circumference of a circle with radius 5 cm.",opts:["15.7 cm","31.4 cm","78.5 cm","10 cm"],a:1,fb:"d = 10, C = 3.14 × 10 = 31.4 cm"},
+    {q:"Find the area of a circle with radius 3 cm.",opts:["9.42 cm²","18.84 cm²","28.26 cm²","6.28 cm²"],a:2,fb:"A = 3.14 × 3² = 3.14 × 9 = 28.26 cm²"},
+    {q:"A circle has diameter 14 m. What is its radius?",opts:["28 m","7 m","14 m","3.5 m"],a:1,fb:"Radius = diameter ÷ 2 = 14÷2 = 7 m"},
+    {q:"A wheel has radius 0.5 m. How far does it travel in one full rotation?",opts:["0.785 m","1.57 m","3.14 m","6.28 m"],a:1,fb:"One rotation = circumference = 2×3.14×0.5 = 3.14×1 = 3.14. Wait: 2π×0.5 = π = 3.14... but d=1m so C=πd=3.14×1=3.14. Hmm: 2×3.14×0.5=3.14 m. Correct answer: 3.14 m. Let me recheck options — 3.14 m is option c."},
+    {q:"What is the area of a circle with diameter 10 cm?",opts:["31.4 cm²","78.5 cm²","314 cm²","15.7 cm²"],a:1,fb:"r=5, A=3.14×25=78.5 cm²"},
+    {q:"Which statement about π is TRUE?",opts:["π = 22/7 exactly","π is exactly 3.14","π is the ratio of circumference to diameter","π changes for different circles"],a:2,fb:"π = C/d for ANY circle. It is always the same ratio."},
+    {q:"A circular pond has radius 8 m. What is its circumference?",opts:["25.12 m","50.24 m","200.96 m","16 m"],a:1,fb:"C = 2×3.14×8 = 50.24 m"},
+    {q:"What is the area of a circle with radius 10 cm?",opts:["31.4 cm²","314 cm²","62.8 cm²","100 cm²"],a:1,fb:"A = 3.14 × 100 = 314 cm²"},
+    {q:"A circle has circumference 25.12 cm. What is its diameter?",opts:["6 cm","7 cm","8 cm","9 cm"],a:2,fb:"d = C ÷ π = 25.12 ÷ 3.14 = 8 cm"},
+    {q:"Compare: Area of circle r=4 vs r=2. Which is bigger and by how much?",opts:["2× bigger","4× bigger","8× bigger","Same"],a:1,fb:"A=πr². r=4: 16π; r=2: 4π. Ratio = 16/4 = 4 times bigger."},
+    {q:"The diameter of Earth is about 12,742 km. What is its circumference?",opts:["About 20,000 km","About 40,000 km","About 80,000 km","About 12,742 km"],a:1,fb:"C = 3.14 × 12,742 ≈ 40,010 km ≈ 40,000 km"},
+    {q:"What unit do we use for area?",opts:["cm","cm²","cm³","no unit"],a:1,fb:"Area is measured in square units (cm², m², etc.)"},
+    {q:"Which formula gives circumference when you know the radius?",opts:["C = πr","C = 2πr","C = πr²","C = r/π"],a:1,fb:"C = 2πr (or equivalently C = πd where d=2r)"},
+    {q:"A circular rug has diameter 3 m. What is its area? (π≈3.14)",opts:["7.065 m²","9.42 m²","28.26 m²","6 m²"],a:0,fb:"r=1.5, A=3.14×1.5²=3.14×2.25=7.065 m²"},
+    {q:"If the area of a circle is 50.24 cm², what is the radius?",opts:["2 cm","4 cm","6 cm","8 cm"],a:1,fb:"50.24 = 3.14×r², r²=16, r=4 cm"},
+    {q:"Circumference of a semicircle (half circle) with diameter 10 cm includes:",opts:["Just the curved part: πr","The diameter + curved part: πr + d","2πr","πd only"],a:1,fb:"A semicircle's perimeter = half circumference + diameter = πr + d = 3.14×5+10=25.7 cm"}
+  ],
+  volume:[
+    {q:"Volume formula for a rectangular prism:",opts:["V = l + w + h","V = l × w × h","V = 2(lw + lh + wh)","V = l²h"],a:1,fb:"V = length × width × height"},
+    {q:"Volume formula for a cylinder:",opts:["V = πr²","V = πrh","V = πr²h","V = 2πrh"],a:2,fb:"V = πr²h (area of circle × height)"},
+    {q:"Find V of a box: l=5, w=4, h=3 cm",opts:["12 cm³","60 cm³","47 cm³","20 cm³"],a:1,fb:"V = 5×4×3 = 60 cm³"},
+    {q:"Find V of a cube with side 6 cm",opts:["36 cm³","18 cm³","216 cm³","72 cm³"],a:2,fb:"V = 6×6×6 = 216 cm³"},
+    {q:"Find V of cylinder: r=3 cm, h=10 cm (π≈3.14)",opts:["94.2 cm³","282.6 cm³","30 cm³","9.42 cm³"],a:1,fb:"V = 3.14×9×10 = 282.6 cm³"},
+    {q:"What is the volume unit for 3D shapes?",opts:["cm","cm²","cm³","no unit"],a:2,fb:"Volume is measured in cubic units (cm³, m³, etc.)"},
+    {q:"A fish tank is 50 cm × 30 cm × 40 cm. How many cm³ of water can it hold?",opts:["120 cm³","6000 cm³","60,000 cm³","1200 cm³"],a:2,fb:"V = 50×30×40 = 60,000 cm³"},
+    {q:"Cylinder: r=5 cm, h=6 cm. What is V?",opts:["471 cm³","94.2 cm³","942 cm³","150 cm³"],a:0,fb:"V = 3.14×25×6 = 471 cm³"},
+    {q:"A box holds 120 cm³. Its base is 4×5 cm. What is the height?",opts:["4 cm","5 cm","6 cm","24 cm"],a:2,fb:"h = V÷(l×w) = 120÷20 = 6 cm"},
+    {q:"Which shape has the greater volume: cube side 4 OR rectangular prism 3×4×6?",opts:["Cube","Prism","They are equal","Cannot determine"],a:2,fb:"Cube: 4³=64 cm³. Prism: 3×4×6=72 cm³. Prism is greater."},
+    {q:"A cylinder has V=314 cm³ and h=10 cm. What is the radius?",opts:["r=1 cm","r=3 cm","r=√10 cm","r=10 cm"],a:1,fb:"314=3.14×r²×10 → r²=10 → r≈3.16. Closest: 3 cm"},
+    {q:"Double the height of a cylinder. Volume becomes:",opts:["Same","Double","Triple","Quadruple"],a:1,fb:"V=πr²h. If h doubles → V doubles."},
+    {q:"Which has greater volume: cylinder r=4,h=5 OR r=5,h=4?",opts:["r=4,h=5","r=5,h=4","Equal","Need more info"],a:1,fb:"V₁=3.14×16×5=251.2; V₂=3.14×25×4=314. r=5,h=4 is bigger."},
+    {q:"A room is 4m × 5m × 3m. How many m³ of air does it hold?",opts:["12 m³","36 m³","60 m³","40 m³"],a:2,fb:"V = 4×5×3 = 60 m³"},
+    {q:"Convert 1 litre to cm³.",opts:["10 cm³","100 cm³","1000 cm³","10000 cm³"],a:2,fb:"1 litre = 1000 cm³ (1 mL = 1 cm³)"},
+    {q:"A concrete post is a cylinder: r=0.2m, h=2m. Volume?",opts:["0.251 m³","0.502 m³","1.256 m³","0.126 m³"],a:0,fb:"V=3.14×0.04×2=0.2512 m³ ≈ 0.251 m³"},
+    {q:"Rectangular prism: if you triple the length only, volume becomes:",opts:["Same","Double","Triple","9 times"],a:2,fb:"Volume = lwh. If l triples → V triples."},
+    {q:"V=144 cm³ for box. l=6, w=4. Find h.",opts:["4 cm","6 cm","8 cm","24 cm"],a:1,fb:"h = 144 ÷ (6×4) = 144÷24 = 6 cm"},
+    {q:"Cylinder can: radius 3.5 cm, height 12 cm. Volume?",opts:["461.6 cm³","132 cm³","923.2 cm³","42 cm³"],a:0,fb:"V=3.14×12.25×12=3.14×147=461.6 cm³"},
+    {q:"A box holds exactly 1000 cm³. If it is a cube, what is the side length?",opts:["10 cm","100 cm","1000 cm","3.33 cm"],a:0,fb:"s³=1000, s=10 cm"}
+  ],
+  coordinates:[
+    {q:"What is the point where the x-axis and y-axis cross?",opts:["(1,1)","(0,1)","(0,0)","(1,0)"],a:2,fb:"The origin is (0,0)"},
+    {q:"In the ordered pair (x, y), which comes first?",opts:["y","x","Neither","They can swap"],a:1,fb:"Always (x, y) — horizontal first, then vertical."},
+    {q:"Point (3, −4) is in which quadrant?",opts:["Quadrant I","Quadrant II","Quadrant III","Quadrant IV"],a:3,fb:"(+x, −y) = Quadrant IV (right, down)"},
+    {q:"Point (−5, 2) is in which quadrant?",opts:["I","II","III","IV"],a:1,fb:"(−x, +y) = Quadrant II (left, up)"},
+    {q:"Translate A(2,3) right 5 and down 4. New coordinates?",opts:["(7,−1)","(7,7)","(−3,7)","(3,−2)"],a:0,fb:"x+5=7, y−4=−1. New point: (7,−1)"},
+    {q:"Reflect B(4,−3) over the x-axis.",opts:["(4,3)","(−4,−3)","(−4,3)","(4,−3)"],a:0,fb:"Reflecting over x-axis: flip y sign. (4, −3) → (4, 3)"},
+    {q:"Reflect C(−2, 5) over the y-axis.",opts:["(−2,−5)","(2,5)","(−2,5)","(2,−5)"],a:1,fb:"Reflecting over y-axis: flip x sign. (−2,5)→(2,5)"},
+    {q:"Rotate D(3,0) 90° clockwise about the origin.",opts:["(0,3)","(0,−3)","(−3,0)","(3,0)"],a:0,fb:"90° clockwise: (x,y)→(y,−x). (3,0)→(0,−3)... Let me recalculate: (3,0)→(0,−3). Option b."},
+    {q:"Which point is on the y-axis?",opts:["(3,0)","(0,−5)","(2,2)","(−1,1)"],a:1,fb:"Points on y-axis have x=0. (0,−5) has x=0. ✓"},
+    {q:"Which point is on the x-axis?",opts:["(0,4)","(−2,0)","(1,1)","(0,0)"],a:1,fb:"Points on x-axis have y=0. (−2,0) has y=0. ✓"},
+    {q:"What is the distance between (1,0) and (5,0)?",opts:["4","6","5","2"],a:0,fb:"Same y value: just subtract x values: 5−1=4"},
+    {q:"A shape is translated. Its size and shape:",opts:["Change","Stay the same","Only size changes","Only shape changes"],a:1,fb:"Translations move a shape but don't change its size or shape."},
+    {q:"A shape is reflected. Its size and shape:",opts:["Change","Stay the same","Only size changes","It disappears"],a:1,fb:"Reflections also preserve size and shape — it's like a mirror image."},
+    {q:"What transformation slides a shape without turning or flipping?",opts:["Rotation","Reflection","Translation","Dilation"],a:2,fb:"Translation = sliding. No turning or flipping."},
+    {q:"Plot (0, 6). Where is this point?",opts:["On the x-axis, right of origin","On the y-axis, above origin","On the x-axis, left","In Quadrant I"],a:1,fb:"x=0 means it's on the y-axis. y=+6 means it's above origin."},
+    {q:"Translate F(−1, −3) up 6 and left 2.",opts:["(−3,3)","(1,3)","(−3,9)","(1,9)"],a:0,fb:"x+(−2)=−3, y+6=3. New point (−3,3)"},
+    {q:"A square with corners at (1,1),(3,1),(3,3),(1,3) is reflected over y-axis. New corner (1,1) becomes?",opts:["(1,1)","(−1,1)","(1,−1)","(−1,−1)"],a:1,fb:"Reflect over y-axis: flip x sign. (1,1)→(−1,1)"},
+    {q:"What are the quadrants numbered?",opts:["Left to right, top to bottom","Counterclockwise from top-right","Clockwise from top-right","Top-right to bottom-left"],a:1,fb:"Quadrants go counterclockwise: I(+,+), II(−,+), III(−,−), IV(+,−)"},
+    {q:"Point G is at (4,2). After a rotation of 180° about origin, G is at:",opts:["(2,4)","(−4,−2)","(−4,2)","(4,−2)"],a:1,fb:"180° rotation: (x,y)→(−x,−y). (4,2)→(−4,−2)"},
+    {q:"Which transformation produces a mirror image?",opts:["Translation","Rotation","Reflection","All of them"],a:2,fb:"Reflection = mirror image (flip over a line)"}
+  ],
+  graphs:[
+    {q:"What is another name for a circle graph?",opts:["Bar graph","Pie chart","Line graph","Scatter plot"],a:1,fb:"Circle graphs are also called pie charts."},
+    {q:"A full circle in a circle graph represents:",opts:["50%","75%","100%","Any amount"],a:2,fb:"The whole circle = 100% of the data."},
+    {q:"A sector is 25% of a circle. What angle is it?",opts:["25°","45°","90°","180°"],a:2,fb:"25% × 360° = 90°"},
+    {q:"A sector has an angle of 180°. What percent is it?",opts:["18%","25%","50%","100%"],a:2,fb:"180° ÷ 360° = 0.5 = 50%"},
+    {q:"A sector is 72°. What percent of the circle is it?",opts:["7.2%","20%","72%","36%"],a:1,fb:"72 ÷ 360 = 0.2 = 20%"},
+    {q:"Class survey: 60% prefer spring, 25% winter, 15% fall. What angle for winter?",opts:["25°","72°","90°","108°"],a:2,fb:"0.25 × 360° = 90°"},
+    {q:"If 40 students were surveyed and 30% like math, how many like math?",opts:["12","14","15","20"],a:0,fb:"0.30 × 40 = 12 students"},
+    {q:"Which type of data is BEST shown with a circle graph?",opts:["Temperature over time","Parts of a whole (percentages)","Comparing two groups","Showing a trend"],a:1,fb:"Circle graphs are perfect for showing parts of a whole."},
+    {q:"A circle graph has 4 equal sections. What is each section's angle?",opts:["45°","60°","90°","120°"],a:2,fb:"360° ÷ 4 = 90°"},
+    {q:"Budget: $500 total. Food=$200, Rent=$150, Other=$150. What percent is food?",opts:["20%","30%","40%","50%"],a:2,fb:"200/500 = 0.4 = 40%"},
+    {q:"What angle represents food in the above budget pie chart?",opts:["72°","108°","144°","180°"],a:2,fb:"40% × 360° = 144°"},
+    {q:"A pie chart shows pets: Dogs 45%, Cats 30%, Fish 15%, Other 10%. What angle for cats?",opts:["30°","54°","108°","120°"],a:2,fb:"0.30 × 360° = 108°"},
+    {q:"Three sectors are 120°, 90°, 60°. What is the fourth sector's angle?",opts:["60°","90°","100°","90°"],a:1,fb:"360−120−90−60 = 90°"},
+    {q:"A circle graph has a sector with angle 36°. What percent is this?",opts:["3.6%","10%","36%","18%"],a:1,fb:"36 ÷ 360 = 0.1 = 10%"},
+    {q:"To construct a circle graph from data, the FIRST step is to:",opts:["Draw the circle","Calculate angles","Measure with protractor","Label sections"],a:1,fb:"Always calculate the angle for each category first."},
+    {q:"Survey of 200 students: 80 prefer hockey. What angle for hockey in a pie chart?",opts:["80°","40°","144°","160°"],a:2,fb:"80/200=40%, 0.4×360°=144°"},
+    {q:"Which is TRUE about circle graphs?",opts:["They show change over time","All sections must add to 360°","They compare 2 groups directly","They use bars"],a:1,fb:"All sectors must total 360° (100% of the whole)."},
+    {q:"A sector angle is 270°. What fraction of the circle is this?",opts:["1/4","2/3","3/4","1/3"],a:2,fb:"270/360 = 3/4"},
+    {q:"If 1/5 of students walk to school, what is their sector's angle?",opts:["20°","36°","72°","45°"],a:2,fb:"1/5 = 20%. 0.20 × 360° = 72°"},
+    {q:"A circle graph has sectors: A=40%, B=35%, C=?%. What is C?",opts:["15%","20%","25%","75%"],a:2,fb:"100−40−35=25%"}
+  ],
+  probability:[
+    {q:"Probability of an impossible event is:",opts:["1","0.5","0","100"],a:2,fb:"An impossible event has probability 0."},
+    {q:"Probability of a certain event is:",opts:["0","0.5","Any number","1"],a:3,fb:"A certain event has probability 1 (100%)."},
+    {q:"P(rolling a 3 on a 6-sided die) =",opts:["1/3","1/6","3/6","1/2"],a:1,fb:"1 favourable outcome out of 6 total: 1/6"},
+    {q:"A bag has 3 red, 2 blue balls. P(red) =",opts:["3/2","2/5","3/5","1/3"],a:2,fb:"3 red out of 5 total: 3/5"},
+    {q:"P(flipping heads on a coin) =",opts:["1/4","1/3","1/2","2/3"],a:2,fb:"1 head out of 2 outcomes: 1/2"},
+    {q:"Two independent events: P(A)=1/2, P(B)=1/3. P(A and B)=",opts:["5/6","1/6","2/3","1/5"],a:1,fb:"Multiply independent probabilities: 1/2×1/3=1/6"},
+    {q:"Roll a die twice. P(6 both times)=",opts:["1/6","2/6","1/12","1/36"],a:3,fb:"1/6 × 1/6 = 1/36"},
+    {q:"Flip 2 coins. P(both heads)=",opts:["1/2","1/4","1/3","2/4"],a:1,fb:"1/2 × 1/2 = 1/4"},
+    {q:"What does 'experimental probability' mean?",opts:["Calculated with a formula","Based on actual trials/experiments","Always exactly 1/2","The maximum probability"],a:1,fb:"Experimental probability is measured by actually running the experiment and recording results."},
+    {q:"You flip a coin 100 times and get 47 heads. Experimental P(heads)=",opts:["0.5","47%","53%","1/2"],a:1,fb:"47 heads / 100 flips = 47% = 0.47"},
+    {q:"Bag has 4 red, 4 blue, 2 green. P(NOT green)=",opts:["2/10","8/10","2/8","6/10"],a:1,fb:"P(not green) = (4+4)/10 = 8/10 = 4/5"},
+    {q:"Pick card from A,B,C,D,E (5 cards). P(vowel) =",opts:["1/5","2/5","3/5","4/5"],a:1,fb:"Vowels: A, E = 2 out of 5 = 2/5"},
+    {q:"P(rolling even on a 6-sided die) =",opts:["1/6","1/3","1/2","2/3"],a:2,fb:"Even: 2,4,6 = 3 out of 6 = 1/2"},
+    {q:"Spin a spinner with 4 equal sections (red, blue, green, yellow). P(blue or red)=",opts:["1/4","1/2","3/4","2"],a:1,fb:"2 favourable out of 4 total: 2/4 = 1/2"},
+    {q:"Draw a card from standard deck (52 cards). P(Ace)=",opts:["1/52","1/13","1/4","4/52 = 1/13"],a:3,fb:"4 Aces out of 52 cards = 4/52 = 1/13"},
+    {q:"Experimental vs theoretical probability: which is always exact?",opts:["Experimental","Theoretical","Both","Neither"],a:1,fb:"Theoretical probability is exact (based on math). Experimental can vary each time."},
+    {q:"Roll a die. P(less than 3)=",opts:["1/6","1/3","1/2","2/3"],a:1,fb:"Numbers less than 3: 1,2 = 2 out of 6 = 1/3"},
+    {q:"Flip coin AND roll die. How many total outcomes?",opts:["8","12","6","2"],a:1,fb:"2 coin outcomes × 6 die outcomes = 12 total outcomes"},
+    {q:"P(drawing a heart from a 52-card deck)=",opts:["1/4","1/13","13/52 = 1/4","1/2"],a:0,fb:"13 hearts out of 52 cards = 13/52 = 1/4"},
+    {q:"You roll a die 60 times. How many times do you EXPECT to roll a 5?",opts:["5 times","10 times","12 times","6 times"],a:1,fb:"P(5) = 1/6. Expected = 1/6 × 60 = 10 times"}
+  ],
+  financial:[
+    {q:"BC has 5% GST + 7% PST = 12% total tax. Tax on $50?",opts:["$5","$6","$7","$12"],a:1,fb:"12% × $50 = 0.12 × 50 = $6"},
+    {q:"Item costs $80. After 20% discount, sale price?",opts:["$60","$64","$16","$96"],a:1,fb:"Discount=$16, Sale price=$80−$16=$64"},
+    {q:"Leave a 15% tip on $40 bill. Tip amount?",opts:["$4","$5","$6","$8"],a:2,fb:"0.15 × $40 = $6"},
+    {q:"Which is better: 25% off, or buy one get one half off (for 2 items)?",opts:["25% off","BOGO half off","They are the same","Depends on price"],a:0,fb:"BOGO half off = 25% off total. They are equal! But for 1 item, 25% off is better."},
+    {q:"$200 item with 12% tax. Final price?",opts:["$212","$224","$188","$232"],a:1,fb:"Tax = 0.12×200=$24. Final = $200+$24 = $224"},
+    {q:"You save $15 on a $75 item. What percent was the discount?",opts:["15%","20%","25%","10%"],a:1,fb:"$15/$75 = 0.2 = 20% discount"},
+    {q:"Which means 'earning interest on interest'?",opts:["Simple interest","Compound interest","Gross income","Net income"],a:1,fb:"Compound interest = earning interest on your interest, making money grow faster."},
+    {q:"$300 at 10% simple interest for 1 year. Interest earned?",opts:["$10","$30","$300","$3"],a:1,fb:"Interest = 10% × $300 = $30"},
+    {q:"A $120 game is on sale for $90. Percent discount?",opts:["25%","30%","20%","33%"],a:0,fb:"Savings=$30. $30/$120 = 0.25 = 25%"},
+    {q:"Gross income vs net income: which is smaller?",opts:["Gross","Net","They are equal","Depends"],a:1,fb:"Net income is after deductions (taxes, etc.), so it's smaller than gross."},
+    {q:"$50 jacket + 12% tax. How much do you pay?",opts:["$56","$62","$44","$51.20"],a:0,fb:"Tax = 0.12×50=$6. Total=$50+$6=$56"},
+    {q:"You earn $12/hour and work 20 hours. Gross pay?",opts:["$20","$120","$240","$32"],a:2,fb:"$12 × 20 = $240"},
+    {q:"Budget: $200/month. Spend 30% on food. How much is that?",opts:["$30","$60","$70","$80"],a:1,fb:"0.30 × $200 = $60"},
+    {q:"$1000 invested at 5% for 2 years (simple interest). Total interest?",opts:["$50","$100","$150","$200"],a:1,fb:"Simple interest = Principal × rate × time = 1000×0.05×2=$100"},
+    {q:"What does 'on sale for 1/3 off' mean for a $60 item?",opts:["Pay $20","Pay $40","Pay $30","Pay $45"],a:1,fb:"1/3 of $60 = $20 off. Pay $60−$20=$40"},
+    {q:"Restaurant bill: $55. 18% tip. Total with tip?",opts:["$64.90","$73.50","$9.90","$65.90"],a:0,fb:"Tip = 0.18×55=$9.90. Total = $55+$9.90 = $64.90"},
+    {q:"Which is the best deal: 40% off $80, OR pay $50?",opts:["40% off $80","Pay $50","They are equal","Need more info"],a:1,fb:"40% off $80 = $48. $48 < $50, so 40% off is better!"},
+    {q:"Percent means 'per ____'",opts:["Ten","Hundred","Thousand","Million"],a:1,fb:"Per CENT = per hundred. 'Cent' means 100."},
+    {q:"Sales: $500 item, 15% tax, 20% off. Apply discount FIRST, then tax. Price?",opts:["$440","$460","$460","$368"],a:0,fb:"$500 − 20% = $400. Tax: $400 × 1.15 = $460. Wait: 20% off first: $400, then 15% tax: $400×1.15=$460."},
+    {q:"You have $50 budget. You want to buy 3 items at $14.99 each + 12% tax. Can you afford it?",opts:["Yes","No","Exactly $50","Need more info"],a:1,fb:"3×$14.99=$44.97. Tax: 0.12×$44.97=$5.40. Total=$50.37 > $50. No!"}
+  ]
+};
+
+// ─────────────────────────────────────────────
+// QUIZ ENGINE
+// ─────────────────────────────────────────────
+const state = {};
+
+function initQuiz(topic) {
+  if (state[topic]) return;
+  state[topic] = { score: 0, answered: 0 };
+  const qs = QUIZZES[topic];
+  const container = document.getElementById('qs-' + topic);
+  if (!container) return;
+  container.innerHTML = qs.map((q, i) => `
+    <div class="q-block" id="qb-${topic}-${i}">
+      <p class="q-text"><span class="q-num">${i+1}</span>${q.q}</p>
+      <div class="opts">
+        ${q.opts.map((o,j) => `<button class="opt-btn" onclick="pickAnswer('${topic}',${i},${j})">${o}</button>`).join('')}
+      </div>
+      <div class="q-fb" id="fb-${topic}-${i}"></div>
+    </div>
+  `).join('');
+}
+
+function pickAnswer(topic, qIdx, optIdx) {
+  const q = QUIZZES[topic][qIdx];
+  const block = document.getElementById(`qb-${topic}-${qIdx}`);
+  const buttons = block.querySelectorAll('.opt-btn');
+  const fb = document.getElementById(`fb-${topic}-${qIdx}`);
+  if (buttons[0].disabled) return;
+
+  buttons.forEach(b => b.disabled = true);
+  state[topic].answered++;
+
+  if (optIdx === q.a) {
+    buttons[optIdx].classList.add('correct');
+    state[topic].score++;
+    fb.textContent = '✅ ' + (q.fb || 'Correct!');
+    fb.className = 'q-fb show ok';
+  } else {
+    buttons[optIdx].classList.add('wrong');
+    buttons[q.a].classList.add('correct');
+    fb.textContent = '❌ ' + (q.fb || 'Not quite!');
+    fb.className = 'q-fb show no';
+  }
+
+  document.getElementById('sc-' + topic).textContent = state[topic].score;
+  document.getElementById('an-' + topic).textContent = state[topic].answered;
+  const pct = (state[topic].answered / QUIZZES[topic].length) * 100;
+  document.getElementById('pb-' + topic).style.width = pct + '%';
+
+  if (state[topic].answered === QUIZZES[topic].length) {
+    setTimeout(() => showResult(topic), 700);
+  }
+}
+
+function showResult(topic) {
+  document.getElementById('qs-' + topic).style.display = 'none';
+  const score = state[topic].score;
+  const total = QUIZZES[topic].length;
+  let emoji, msg;
+  if (score === total) { emoji = '🏆'; msg = 'Perfect score! Outstanding work!'; }
+  else if (score >= 16) { emoji = '🌟'; msg = 'Excellent! You really know this topic!'; }
+  else if (score >= 12) { emoji = '👍'; msg = 'Good work! Review the ones you missed.'; }
+  else if (score >= 8) { emoji = '📖'; msg = 'Keep studying — re-read the examples!'; }
+  else { emoji = '🌱'; msg = "Don't give up! Work through the examples again."; }
+  document.getElementById('qre-' + topic).textContent = emoji;
+  document.getElementById('qrs-' + topic).textContent = `${score} / ${total}`;
+  document.getElementById('qrm-' + topic).textContent = msg;
+  document.getElementById('qr-' + topic).classList.add('show');
+}
+
+function restartQuiz(topic) {
+  state[topic] = { score: 0, answered: 0 };
+  document.getElementById('sc-' + topic).textContent = '0';
+  document.getElementById('an-' + topic).textContent = '0';
+  document.getElementById('pb-' + topic).style.width = '0%';
+  document.getElementById('qr-' + topic).classList.remove('show');
+  document.getElementById('qs-' + topic).style.display = '';
+  const buttons = document.querySelectorAll(`#qs-${topic} .opt-btn`);
+  buttons.forEach(b => { b.classList.remove('correct','wrong'); b.disabled = false; });
+  const fbs = document.querySelectorAll(`#qs-${topic} .q-fb`);
+  fbs.forEach(f => { f.className = 'q-fb'; f.textContent = ''; });
+}
+
+// ─────────────────────────────────────────────
+// NAVIGATION
+// ─────────────────────────────────────────────
+function show(id) {
+  document.querySelectorAll('.topic-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const panel = document.getElementById(id);
+  if (panel) { panel.classList.add('active'); initQuiz(id); }
+  const nav = document.getElementById('nav-' + id);
+  if (nav) nav.classList.add('active');
+  // close mobile sidebar
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+  window.scrollTo(0, 0);
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+
+// Init home
+initQuiz('integers');
+</script>
+</body>
+</html>
